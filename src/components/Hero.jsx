@@ -1,7 +1,6 @@
 // --- src/components/Hero.jsx ---
 'use client';
 import { motion } from 'framer-motion';
-import heroImg from '../assets/hero.jpg';
 
 export default function Hero({ locale = 'en' }) {
   const text = locale === 'en'
@@ -25,7 +24,7 @@ export default function Hero({ locale = 'en' }) {
     >
       {/* Background image */}
       <img
-        src={heroImg}
+        src="/assets/hero.jpg"
         alt="Montréal skyline"
         className="absolute inset-0 w-full h-full object-cover"
       />
