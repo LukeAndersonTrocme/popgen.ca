@@ -1,11 +1,9 @@
-<!-- src/content/en/research.md -->
 # Research
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 
-- **Spatial ancestry simulations**  
-- **Pedigree vs. genetic ancestry**  
-- **Accessible bioinformatics workflows**
+Our lab explores how geography and population history shape genetic variation. We develop innovative computational methods to study spatial patterns of ancestry across species, enhancing our understanding of evolution, human history, and biodiversity.
 
-<!--
-PROMPT: Expand on one research theme—e.g. “Our lab develops…”
--->
+- **Spatial analysis of genetic variation:** Quantifying how geographic features influence gene flow and population structure.  
+- **Ancestral recombination graphs (ARGs):** Developing computational tools to reconstruct genealogies and ancestry paths.  
+- **Population-scale genealogical modeling:** Bridging genealogical records with genomic data to study evolutionary dynamics.  
+- **Applications to conservation biology:** Using genetic methods to inform strategies for endangered species.  
+- **Human genetic diversity and history:** Uncovering migration and demographic events that shape human genetic variation.

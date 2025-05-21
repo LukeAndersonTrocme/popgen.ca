@@ -1,8 +1,4 @@
-<!-- src/content/en/contact.md -->
 # Contact
-- Email: [info@popgen.ca](mailto:info@popgen.ca)  
-- Address: Département de biologie, UdeM  
 
-<!--
-PROMPT: Insert accessibility & Law 25 privacy blurb.
--->
+- Email: landersontrocme at uchicago dot edu
+- Address: Département de biologie, Université de Montréal, Campus MIL, bureau B-5411  

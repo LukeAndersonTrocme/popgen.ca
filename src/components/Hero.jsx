@@ -1,18 +1,19 @@
-// --- src/components/Hero.jsx ---
 'use client';
 import { motion } from 'framer-motion';
 
 export default function Hero({ locale = 'en' }) {
   const text = locale === 'en'
     ? {
-        title: 'PopGen Lab',
-        subtitle: 'Launching Fall 2025',
-        description: 'Placeholder research teaser—replace with yours.',
+        title: 'Genomics Beyond Boundaries',
+        subtitle: 'Opening Our Doors Fall 2025',
+        description:
+          'Our lab uses powerful computational methods to map how genetic information spreads across landscapes and generations. By tracking ancestry through space and time, we uncover patterns crucial for understanding evolution, human history, and biodiversity conservation.',
       }
     : {
-        title: 'Laboratoire PopGen',
-        subtitle: 'Lancement automne 2025',
-        description: 'Texte de présentation factice à remplacer.',
+        title: 'La génomique sans frontières',
+        subtitle: "Ouverture officielle à l'automne 2025",
+        description:
+          "Notre laboratoire utilise des méthodes computationnelles puissantes pour cartographier comment l'information génétique se propage à travers les paysages et les générations. En suivant l'ascendance dans l'espace et le temps, nous révélons des motifs cruciaux pour comprendre l'évolution, l'histoire humaine et la conservation de la biodiversité.",
       };
 
   return (

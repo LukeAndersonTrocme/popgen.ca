@@ -1,11 +1,5 @@
-<!-- src/content/fr/equipe.md -->
-# Rejoignez-nous
-Nous recrutons !  
+# Équipe
 
-- Doctorants  
-- Postdoctorants  
-- Ingénieurs logiciels  
-
-<!--
-PROMPT : Profil recherché en 2–3 points.
--->
+- **Luke Anderson‑Trocmé** (Investigateur principal)  
+- **Brian (chat)** (Mascotte du laboratoire / Responsable du bien‑être 🐱)  
+- **Et si c’était vous !** (Postes ouverts bientôt !)
