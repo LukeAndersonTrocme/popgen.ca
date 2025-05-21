@@ -1,11 +1,7 @@
 ---
-// src/pages/fr/recherche.astro
-import Navbar from '../../components/Navbar.jsx';
-import content from '../../content/fr/recherche.md';
+import Page from '../../layouts/Page.astro';
+import Content from '../../content/fr/recherche.md';
 ---
-<html lang="fr">
-  <body class="prose mx-auto my-12">
-    <Navbar locale="fr" />
-    {content}
-  </body>
-</html>
+<Page title="Recherche – Laboratoire PopGen" lang="fr" locale="fr">
+  <Content />
+</Page>

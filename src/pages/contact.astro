@@ -1,15 +1,7 @@
---- src/pages/contact.astro ---
 ---
-import Navbar from '../components/Navbar.jsx';
-import content from '../content/en/contact.md';
+import Page from '../layouts/Page.astro';
+import Content from '../content/en/contact.md';
 ---
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Contact – PopGen Lab</title>
-  </head>
-  <body class="font-sans text-slate-900 dark:text-slate-50 prose mx-auto my-12">
-    <Navbar locale="en" />
-    {content}
-  </body>
-</html>
+<Page title="Contact – PopGen Lab" lang="en" locale="en">
+  <Content />
+</Page>

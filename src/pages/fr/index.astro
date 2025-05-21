@@ -1,17 +1,7 @@
 ---
-// --- src/pages/fr/index.astro ---
-import Navbar from '../../components/Navbar.jsx';
+import Page from '../../layouts/Page.astro';
 import Hero from '../../components/Hero.jsx';
 ---
-<html lang="fr" class="dark:bg-slate-900">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Laboratoire PopGen</title>
-  </head>
-  <body class="font-sans text-slate-900 dark:text-slate-50">
-    <Navbar locale="fr" />
-    <Hero locale="fr" client:load />
-    <!-- Autres sections ici -->
-  </body>
-</html>
+<Page title="Laboratoire PopGen" lang="fr" locale="fr">
+  <Hero locale="fr" client:load />
+</Page>

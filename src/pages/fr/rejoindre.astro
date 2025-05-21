@@ -1,15 +1,7 @@
---- src/pages/fr/rejoindre.astro ---
 ---
-import Navbar from '../../components/Navbar.jsx';
-import content from '../../content/fr/rejoindre.md';
+import Page from '../../layouts/Page.astro';
+import Content from '../../content/fr/rejoindre.md';
 ---
-<html lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <title>Rejoindre – Laboratoire PopGen</title>
-  </head>
-  <body class="font-sans text-slate-900 dark:text-slate-50 prose mx-auto my-12">
-    <Navbar locale="fr" />
-    {content}
-  </body>
-</html>
+<Page title="Rejoindre – Laboratoire PopGen" lang="fr" locale="fr">
+  <Content />
+</Page>

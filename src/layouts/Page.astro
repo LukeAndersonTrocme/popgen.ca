@@ -1,0 +1,26 @@
+---
+// src/layouts/Page.astro
+/**
+ * Props
+ *  - title  : string  (required)
+ *  - lang   : 'en' | 'fr'
+ *  - locale : 'en' | 'fr' (passed to Navbar)
+ */
+import Navbar from '../components/Navbar.jsx';
+const { title, lang = 'en', locale = 'en' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang={lang} class="dark:bg-slate-900">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="font-sans text-slate-900 dark:text-slate-50">
+    <Navbar locale={locale} />
+    <main class="prose mx-auto my-12">
+      <slot />
+    </main>
+  </body>
+</html>

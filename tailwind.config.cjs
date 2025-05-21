@@ -1,8 +1,7 @@
 // --- tailwind.config.cjs ---
 module.exports = {
   content: [
-    './src/**/*.{astro,html,js,jsx,ts,tsx}',
-    './src/components/**/*.{js,jsx,ts,tsx}',
+    './src/**/*.{astro,html,js,jsx,ts,tsx,md,mdx}', // include markdown!
   ],
   darkMode: 'class',
   theme: {
