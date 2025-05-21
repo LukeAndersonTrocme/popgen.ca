@@ -1,6 +1,12 @@
 # .github/workflows/deploy.yml
 name: 📦 Build & Deploy
 
+# Grant the token explicit write access
+permissions:
+  contents: write     # needed to push to gh-pages
+  pages: write        # needed if you're using GitHub Pages API
+  id-token: write     # not strictly required here, but good practice
+
 on:
   push:
     branches:
@@ -14,7 +20,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: '20.x'
+          node-version: '18.x'
 
       - run: npm ci
       - run: npm run build
