@@ -1,0 +1,33 @@
+# --- .github/workflows/orcid-sync.yml ---
+name: ORCID Publications Sync
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 0'  # weekly on Sundays UTC
+
+jobs:
+  fetch-orcid:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Fetch ORCID works
+        run: |
+          curl -s https://pub.orcid.org/v3.0/0000-0001-9187-2792/works \
+            -H "Accept: application/json" \
+            | jq '.group[] .["work-summary"][] | {
+                title: .title.title.value,
+                journal: .journal-title.value,
+                year: .publication-date.year.value,
+                doi: (.external-ids["external-id"][0].external-id-value // "")
+              }' \
+            | jq -s '.' > src/data/publications.json
+
+      - name: Commit & push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/publications.json
+          git diff --quiet || git commit -m "chore: update ORCID publications"
+          git push
