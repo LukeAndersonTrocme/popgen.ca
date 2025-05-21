@@ -3,28 +3,44 @@ import { useState } from 'react';
 
 /**
  * Centralised route map so EN/FR slugs stay in sync.
- * Add new pages here once they exist (e.g. join / rejoindre).
+ * Add new pages here once they exist.
  */
 const routes = {
   en: {
     home: '/',
     research: '/research',
     publications: '/publications',
+    people: '/people',
+    news: '/news',
+    join: '/join',
+    contact: '/contact',
     switch: '/fr',        // link to French home
     switchLabel: 'Français',
     homeLabel: 'Home',
     researchLabel: 'Research',
     pubsLabel: 'Publications',
+    peopleLabel: 'People',
+    newsLabel: 'News',
+    joinLabel: 'How to Join',
+    contactLabel: 'Contact',
   },
   fr: {
     home: '/fr',
     research: '/fr/recherche',
     publications: '/fr/publications',
+    people: '/fr/equipe',
+    news: '/fr/nouvelles',
+    join: '/fr/rejoindre',
+    contact: '/fr/contact',
     switch: '/',
     switchLabel: 'English',
     homeLabel: 'Accueil',
     researchLabel: 'Recherche',
-    pubsLabel: 'Publications', // same string in FR
+    pubsLabel: 'Publications',
+    peopleLabel: 'Équipe',
+    newsLabel: 'Nouvelles',
+    joinLabel: 'Rejoindre',
+    contactLabel: 'Contact',
   },
 };
 
@@ -33,7 +49,7 @@ export default function Navbar({ locale = 'en' }) {
 
   return (
     <nav className="p-4 flex justify-between bg-white dark:bg-slate-900">
-      <ul className="flex space-x-6">
+      <ul className="flex space-x-6 flex-wrap">
         <li>
           <a href={r.home} className="hover:text-cta">
             {r.homeLabel}
@@ -47,6 +63,26 @@ export default function Navbar({ locale = 'en' }) {
         <li>
           <a href={r.publications} className="hover:text-cta">
             {r.pubsLabel}
+          </a>
+        </li>
+        <li>
+          <a href={r.people} className="hover:text-cta">
+            {r.peopleLabel}
+          </a>
+        </li>
+        <li>
+          <a href={r.news} className="hover:text-cta">
+            {r.newsLabel}
+          </a>
+        </li>
+        <li>
+          <a href={r.join} className="hover:text-cta">
+            {r.joinLabel}
+          </a>
+        </li>
+        <li>
+          <a href={r.contact} className="hover:text-cta">
+            {r.contactLabel}
           </a>
         </li>
       </ul>
