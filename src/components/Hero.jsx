@@ -1,6 +1,7 @@
 // --- src/components/Hero.jsx ---
 'use client';
 import { motion } from 'framer-motion';
+import heroImg from '../assets/hero.jpg';
 
 export default function Hero({ locale = 'en' }) {
   const text = locale === 'en'
@@ -17,14 +18,26 @@ export default function Hero({ locale = 'en' }) {
 
   return (
     <motion.section
-      className="h-screen flex flex-col items-center justify-center bg-primary text-white"
+      className="relative h-screen w-full overflow-hidden"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <h1 className="text-6xl font-bold">{text.title}</h1>
-      <p className="mt-4 text-2xl">{text.subtitle}</p>
-      <p className="mt-6 max-w-lg text-center">{text.description}</p>
+      {/* Background image */}
+      <img
+        src={heroImg}
+        alt="Montréal skyline"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      {/* Gradient overlay for contrast */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent" />
+
+      {/* Text content */}
+      <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 text-center text-white">
+        <h1 className="text-6xl font-bold">{text.title}</h1>
+        <p className="mt-4 text-2xl">{text.subtitle}</p>
+        <p className="mt-6 max-w-lg">{text.description}</p>
+      </div>
     </motion.section>
   );
 }

@@ -1,18 +1,20 @@
 // --- astro.config.mjs ---
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
-import i18n from '@astrojs/i18n';
+import react from '@astrojs/react';
 
 export default defineConfig({
   site: 'https://popgen.ca',
+  output: 'static',
   integrations: [
     tailwind(),
-    i18n({
-      defaultLocale: 'en',
-      locales: ['en', 'fr'],
-      // Tell it where your pages live:
-      pagesDirectory: './src/pages',
-    }),
+    react(),
   ],
   markdown: { syntaxHighlight: 'prism' },
+  // Built-in i18n routing (Astro v4+)
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'fr'],
+    // English at '/', French at '/fr/...'
+  },
 });
