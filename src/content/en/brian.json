@@ -1,0 +1,8 @@
+{
+  "title": "Brian",
+  "description": "Our official lab mascot and wellness officer 🐱. Enjoy these snapshots!",
+  "photos": [
+    { "src": "/assets/team/brian1.jpg", "alt": "Brian" },
+    { "src": "/assets/team/brian2.jpg", "alt": "Brian" }
+  ]
+}

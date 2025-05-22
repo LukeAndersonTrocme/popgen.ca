@@ -38,7 +38,8 @@
     {
       "name": "Brian",
       "role": "Lab Mascot / Wellness Officer",
-      "img": "/assets/team/brian.jpg"
+      "img": "/assets/team/brian.jpg",
+      "slug": "brian"
     },
     {
       "name": "This could be you!",

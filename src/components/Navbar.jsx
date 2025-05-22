@@ -1,4 +1,3 @@
-// src/components/Navbar.jsx
 'use client';
 import { useState, useEffect } from 'react';
 import { Sheet, SheetTrigger, SheetContent } from './ui/sheet.jsx';
@@ -7,12 +6,13 @@ import { Menu } from 'lucide-react';
 
 const routes = {
   en: {
-    home: '#home',
-    research: '#research',
-    people: '#people',
-    news: '#news',
-    join: '#join',
-    contact: '#contact',
+    // Always go to root, not just #home
+    home: '/',
+    research: '/#research',
+    people: '/#people',
+    news: '/#news',
+    join: '/#join',
+    contact: '/#contact',
     switch: '/fr',
     switchLabel: 'Français',
     homeLabel: 'Home',
@@ -23,12 +23,12 @@ const routes = {
     contactLabel: 'Contact',
   },
   fr: {
-    home: '#home',
-    research: '#research',
-    people: '#people',
-    news: '#news',
-    join: '#join',
-    contact: '#contact',
+    home: '/fr/',
+    research: '/fr/#research',
+    people: '/fr/#people',
+    news: '/fr/#news',
+    join: '/fr/#join',
+    contact: '/fr/#contact',
     switch: '/',
     switchLabel: 'English',
     homeLabel: 'Accueil',

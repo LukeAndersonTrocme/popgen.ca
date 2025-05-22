@@ -23,7 +23,8 @@
     "lucide-react": "^0.511.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "shadcn-ui": "0.9.5"
+    "shadcn-ui": "0.9.5",
+    "yet-another-react-lightbox": "^3.23.2"
   },
   "devDependencies": {
     "@fontsource-variable/montserrat": "^5.2.5",

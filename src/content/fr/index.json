@@ -38,7 +38,8 @@
     {
       "name": "Brian",
       "role": "Mascotte du labo / Responsable du bien-être",
-      "img": "/assets/team/brian.jpg"
+      "img": "/assets/team/brian.jpg",
+      "slug": "brian"
     },
     {
       "name": "Ce pourrait être vous !",

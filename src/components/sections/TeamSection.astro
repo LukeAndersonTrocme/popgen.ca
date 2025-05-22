@@ -1,4 +1,5 @@
 ---
+// src/components/sections/TeamSection.astro
 import Reveal from '../Reveal.jsx';
 import { Card, CardContent } from '../ui/card.jsx';
 import enData from '../../content/en/index.json';
@@ -16,20 +17,37 @@ const { team } = data;
       {locale === 'fr' ? 'Équipe' : 'Meet the Team'}
     </h2>
     <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      {team.map((m) => (
-        <Card class="transform hover:scale-105 transition">
-          <CardContent>
-            <div class="w-32 h-32 mx-auto -mt-16 overflow-hidden rounded-full shadow-lg">
-              <img src={m.img} alt={m.name} class="object-cover w-full h-full" />
-            </div>
-            <h3 class="mt-6 text-xl font-semibold">{m.name}</h3>
-            <p class="text-sm text-slate-600 dark:text-slate-400">{m.role}</p>
-            {m.bio && (
-              <p class="mt-2 text-slate-700 dark:text-slate-300">{m.bio}</p>
-            )}
-          </CardContent>
-        </Card>
-      ))}
+      {team.map((m) => {
+        // If this member has a slug, link to their page
+        const href = m.slug
+          ? `/${locale === 'fr' ? 'fr/' : ''}${m.slug}`
+          : null;
+
+        // Build the card
+        const card = (
+          <Card class="transform hover:scale-105 transition">
+            <CardContent>
+              <div class="w-32 h-32 mx-auto -mt-16 overflow-hidden rounded-full shadow-lg">
+                <img src={m.img} alt={m.name} class="object-cover w-full h-full" />
+              </div>
+              <h3 class="mt-6 text-xl font-semibold">{m.name}</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400">{m.role}</p>
+              {m.bio && (
+                <p class="mt-2 text-slate-700 dark:text-slate-300">{m.bio}</p>
+              )}
+            </CardContent>
+          </Card>
+        );
+
+        // Wrap in a block-level link if slug is present
+        return href ? (
+          <a href={href} class="block" key={m.name}>
+            {card}
+          </a>
+        ) : (
+          <div key={m.name}>{card}</div>
+        );
+      })}
     </div>
   </section>
 </Reveal>

@@ -1,0 +1,8 @@
+{
+  "title": "Brian",
+  "description": "Notre mascotte officielle et responsable du bien-être 🐱. Profitez de ces photos !",
+  "photos": [
+    { "src": "/assets/team/brian1.jpg", "alt": "Brian" },
+    { "src": "/assets/team/brian2.jpg", "alt": "Brian" }
+  ]
+}
