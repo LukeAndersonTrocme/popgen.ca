@@ -1,0 +1,6 @@
+---
+// src/components/sections/HeroSection.astro
+import Hero from '../Hero.jsx';
+const { locale = 'en' } = Astro.props;
+---
+<Hero locale={locale} client:load />

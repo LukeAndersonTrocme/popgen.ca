@@ -1,145 +1,19 @@
 ---
-// src/pages/index.astro
 import Page from '../layouts/Page.astro';
-import Hero from '../components/Hero.jsx';
-import Reveal from '../components/Reveal.jsx';
-import { Card, CardContent } from '../components/ui/card.jsx';
+import HeroSection from '../components/sections/HeroSection.astro';
+import ResearchSection from '../components/sections/ResearchSection.astro';
+import TeamSection from '../components/sections/TeamSection.astro';
+import NewsSection from '../components/sections/NewsSection.astro';
+import JoinSection from '../components/sections/JoinSection.astro';
+import ContactSection from '../components/sections/ContactSection.astro';
+const { locale = 'en' } = Astro.props;
 ---
-<Page title="PopGen Lab" lang="en" locale="en">
+<Page title="PopGen Lab" lang="en" locale={locale}>
+  <HeroSection locale={locale} />
 
-  <!-- Hero with parallax -->
-  <Hero locale="en" client:load />
-
-  <!-- Research Section -->
-  <Reveal client:load>
-    <section
-      id="research"
-      class="scroll-mt-24 py-20 bg-[#F7F9FC] dark:bg-slate-800 text-center"
-    >
-      <h2 class="text-4xl font-bold">Our Research</h2>
-      <p class="mt-4 mx-auto max-w-2xl">
-        Our lab explores how geography and population history shape genetic variation. We develop innovative computational methods to study spatial patterns of ancestry across species, enhancing our understanding of evolution, human history, and biodiversity.
-      </p>
-      <ul class="mt-6 list-disc list-inside text-left max-w-2xl mx-auto space-y-2">
-        <li><strong>Spatial analysis of genetic variation:</strong> Quantifying how geographic features influence gene flow and population structure.</li>
-        <li><strong>Ancestral recombination graphs (ARGs):</strong> Developing computational tools to reconstruct genealogies and ancestry paths.</li>
-        <li><strong>Population-scale genealogical modeling:</strong> Bridging genealogical records with genomic data to study evolutionary dynamics.</li>
-        <li><strong>Applications to conservation biology:</strong> Using genetic methods to inform strategies for endangered species.</li>
-        <li><strong>Human genetic diversity and history:</strong> Uncovering migration and demographic events that shape human genetic variation.</li>
-      </ul>
-    </section>
-  </Reveal>
-
-  <!-- Team Section -->
-  <Reveal client:load>
-    <section
-      id="people"
-      class="scroll-mt-24 py-20 bg-white dark:bg-slate-900 text-center"
-    >
-      <h2 class="text-4xl font-bold">Meet the Team</h2>
-      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Luke -->
-        <Card class="transform hover:scale-105 transition">
-          <CardContent>
-            <div class="w-32 h-32 mx-auto -mt-16 overflow-hidden rounded-full shadow-lg">
-              <img
-                src="/assets/team/luke.jpg"
-                alt="Luke Anderson-Trocmé"
-                class="object-cover w-full h-full"
-              />
-            </div>
-            <h3 class="mt-6 text-xl font-semibold">Luke Anderson-Trocmé</h3>
-            <p class="text-sm text-slate-600 dark:text-slate-400">Principal Investigator</p>
-            <p class="mt-2 text-slate-700 dark:text-slate-300">
-            </p>
-          </CardContent>
-        </Card>
-
-        <!-- Brian -->
-        <Card class="transform hover:scale-105 transition">
-          <CardContent>
-            <div class="w-32 h-32 mx-auto -mt-16 overflow-hidden rounded-full shadow-lg">
-              <img
-                src="/assets/team/brian.jpg"
-                alt="Brian the Cat"
-                class="object-cover w-full h-full"
-              />
-            </div>
-            <h3 class="mt-6 text-xl font-semibold">Brian (cat)</h3>
-            <p class="text-sm text-slate-600 dark:text-slate-400">
-              Lab Mascot / Wellness Officer
-            </p>
-          </CardContent>
-        </Card>
-
-        <!-- You -->
-        <Card class="transform hover:scale-105 transition">
-          <CardContent>
-            <div class="w-32 h-32 mx-auto -mt-16 overflow-hidden rounded-full shadow-lg">
-              <img
-                src="/assets/team/you.jpg"
-                alt="This could be you!"
-                class="object-cover w-full h-full"
-              />
-            </div>
-            <h3 class="mt-6 text-xl font-semibold">This could be you!</h3>
-            <p class="text-sm text-slate-600 dark:text-slate-400">
-              Open positions coming soon
-            </p>
-          </CardContent>
-        </Card>
-      </div>
-    </section>
-  </Reveal>
-
-  <!-- News Section -->
-  <Reveal client:load>
-    <section
-      id="news"
-      class="scroll-mt-24 py-20 bg-[#F7F9FC] dark:bg-slate-800 text-center"
-    >
-      <h2 class="text-4xl font-bold">News & Updates</h2>
-      <ul class="mt-6 list-disc list-inside max-w-xl mx-auto space-y-4 text-left">
-        <li>
-          <strong>Hello World!</strong> (May 2025)  
-          Our lab website is now live. Stay tuned for updates on upcoming research projects, opportunities, and more!
-        </li>
-      </ul>
-    </section>
-  </Reveal>
-
-  <!-- Join Section -->
-  <Reveal client:load>
-    <section
-      id="join"
-      class="scroll-mt-24 py-20 bg-white dark:bg-slate-900 text-center"
-    >
-      <h2 class="text-4xl font-bold">Links</h2>
-      <ul class="mt-6 list-disc list-inside max-w-xl mx-auto space-y-2 text-left">
-        <li><a href="https://bio.umontreal.ca/english/" class="text-primary hover:underline">Biological Sciences at UdeM</a></li>
-        <li><a href="https://bio.umontreal.ca/english/programs/graduate-programs/masters-in-biological-sciences/" class="text-primary hover:underline">Graduate Programs at UdeM</a></li>
-        <li><a href="https://biomol.umontreal.ca/en/" class="text-primary hover:underline">Bioinformatics at UdeM</a></li>
-        <li><a href="https://irbv.umontreal.ca/institute/infrastructure/laboratories/?lang=en" class="text-primary hover:underline">IRBV Labs at UdeM</a></li>
-      </ul>
-    </section>
-  </Reveal>
-
-  <!-- Contact Section -->
-  <Reveal client:load>
-    <section
-      id="contact"
-      class="scroll-mt-24 py-20 bg-[#F7F9FC] dark:bg-slate-800 text-center"
-    >
-      <h2 class="text-4xl font-bold">Contact</h2>
-      <p class="mt-6">
-        <strong>Email:</strong> landersontrocme at uchicago dot edu
-      </p>
-      <p class="mt-2">
-        <strong>Address:</strong><br />
-        Département de biologie, Université de Montréal,<br />
-        Campus MIL, bureau B-5411
-      </p>
-    </section>
-  </Reveal>
-
+  <ResearchSection locale={locale} />
+  <TeamSection    locale={locale} />
+  <NewsSection    locale={locale} />
+  <JoinSection    locale={locale} />
+  <ContactSection locale={locale} />
 </Page>

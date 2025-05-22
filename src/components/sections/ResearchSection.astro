@@ -1,0 +1,26 @@
+---
+import Reveal from '../Reveal.jsx';
+import enData from '../../content/en/index.json';
+import frData from '../../content/fr/index.json';
+const { locale = 'en' } = Astro.props;
+const data = locale === 'fr' ? frData : enData;
+const { research } = data;
+---
+<Reveal client:load>
+  <section
+    id="research"
+    class="scroll-mt-24 py-20 bg-[#F7F9FC] dark:bg-slate-800 text-center"
+  >
+    <h2 class="text-4xl font-bold">
+      {locale === 'fr' ? 'Recherche' : 'Our Research'}
+    </h2>
+    <p class="mt-4 mx-auto max-w-2xl">{research.intro}</p>
+    <ul class="mt-6 list-disc list-inside text-left max-w-2xl mx-auto space-y-2">
+      {research.points.map((p) => (
+        <li>
+          <strong>{p.title}:</strong> {p.desc}
+        </li>
+      ))}
+    </ul>
+  </section>
+</Reveal>

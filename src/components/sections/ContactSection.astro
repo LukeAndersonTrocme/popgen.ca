@@ -1,0 +1,28 @@
+---
+import Reveal from '../Reveal.jsx';
+import enData from '../../content/en/index.json';
+import frData from '../../content/fr/index.json';
+const { locale = 'en' } = Astro.props;
+const data = locale === 'fr' ? frData : enData;
+const { contact } = data;
+---
+<Reveal client:load>
+  <section
+    id="contact"
+    class="scroll-mt-24 py-20 bg-[#F7F9FC] dark:bg-slate-800 text-center"
+  >
+    <h2 class="text-4xl font-bold">Contact</h2>
+    <p class="mt-6">
+      <strong>{locale === 'fr' ? 'Courriel :' : 'Email:'}</strong> {contact.email}
+    </p>
+    <p class="mt-2">
+      <strong>{locale === 'fr' ? 'Adresse :' : 'Address:'}</strong><br />
+      {contact.address.split('\n').map((line, i, arr) => (
+        <>
+          {line}
+          {i < arr.length - 1 ? <br /> : null}
+        </>
+      ))}
+    </p>
+  </section>
+</Reveal>

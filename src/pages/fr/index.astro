@@ -1,98 +1,19 @@
 ---
-// src/pages/fr/index.astro
 import Page from '../../layouts/Page.astro';
-import Hero from '../../components/Hero.jsx';
-import Reveal from '../../components/Reveal.jsx';
-import { Card, CardContent } from '../../components/ui/card.jsx';
+import HeroSection from '../../components/sections/HeroSection.astro';
+import ResearchSection from '../../components/sections/ResearchSection.astro';
+import TeamSection from '../../components/sections/TeamSection.astro';
+import NewsSection from '../../components/sections/NewsSection.astro';
+import JoinSection from '../../components/sections/JoinSection.astro';
+import ContactSection from '../../components/sections/ContactSection.astro';
+const { locale = 'fr' } = Astro.props;
 ---
-<Page title="Laboratoire PopGen" lang="fr" locale="fr">
+<Page title="Laboratoire PopGen" lang="fr" locale={locale}>
+  <HeroSection locale={locale} />
 
-  <!-- Hero -->
-  <Hero locale="fr" client:load />
-
-  <!-- Recherche -->
-  <Reveal client:load>
-    <section id="research" class="scroll-mt-24 py-20 bg-[#F7F9FC] dark:bg-slate-800 text-center">
-      <h2 class="text-4xl font-bold">Recherche</h2>
-      <p class="mt-4 mx-auto max-w-2xl">
-        Notre labo explore comment la géographie et l’histoire des populations façonnent la variation génétique. Nous développons des méthodes computationnelles innovantes pour étudier ces motifs.
-      </p>
-    </section>
-  </Reveal>
-
-  <!-- Équipe -->
-  <Reveal client:load>
-    <section id="people" class="scroll-mt-24 py-20 bg-white dark:bg-slate-900 text-center">
-      <h2 class="text-4xl font-bold">Équipe</h2>
-      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <Card class="transform hover:scale-105 transition">
-          <CardContent>
-            <div class="w-32 h-32 mx-auto -mt-16 overflow-hidden rounded-full shadow-lg">
-              <img src="/assets/team/luke.jpg" alt="Luke Anderson-Trocmé" class="object-cover w-full h-full"/>
-            </div>
-            <h3 class="mt-6 text-xl font-semibold">Luke Anderson-Trocmé</h3>
-            <p class="text-sm text-slate-600 dark:text-slate-400">Investigateur principal</p>
-            <p class="mt-2 text-slate-700 dark:text-slate-300">
-            </p>
-          </CardContent>
-        </Card>
-        <Card class="transform hover:scale-105 transition">
-          <CardContent>
-            <div class="w-32 h-32 mx-auto -mt-16 overflow-hidden rounded-full shadow-lg">
-              <img src="/assets/team/brian.jpg" alt="Brian le chat" class="object-cover w-full h-full"/>
-            </div>
-            <h3 class="mt-6 text-xl font-semibold">Brian (chat)</h3>
-            <p class="text-sm text-slate-600 dark:text-slate-400">Mascotte / Responsable du bien-être</p>
-          </CardContent>
-        </Card>
-        <Card class="transform hover:scale-105 transition">
-          <CardContent>
-            <div class="w-32 h-32 mx-auto -mt-16 overflow-hidden rounded-full shadow-lg">
-              <img src="/assets/team/you.jpg" alt="Ce pourrait être vous !" class="object-cover w-full h-full"/>
-            </div>
-            <h3 class="mt-6 text-xl font-semibold">Ce pourrait être vous !</h3>
-            <p class="text-sm text-slate-600 dark:text-slate-400">Postes ouverts bientôt</p>
-          </CardContent>
-        </Card>
-      </div>
-    </section>
-  </Reveal>
-
-  <!-- Nouvelles -->
-  <Reveal client:load>
-    <section id="news" class="scroll-mt-24 py-20 bg-[#F7F9FC] dark:bg-slate-800 text-center">
-      <h2 class="text-4xl font-bold">Nouvelles</h2>
-      <p class="mt-4 max-w-xl mx-auto">
-        * **Hello World !** (mai 2025)  
-        Notre site est en ligne. Restez à l’écoute pour nos projets et publications !
-      </p>
-    </section>
-  </Reveal>
-
-  <!-- Rejoindre -->
-  <Reveal client:load>
-    <section id="join" class="scroll-mt-24 py-20 bg-white dark:bg-slate-900 text-center">
-      <h2 class="text-4xl font-bold">Liens</h2>
-      <ul class="mt-6 list-disc list-inside max-w-xl mx-auto text-left space-y-2">
-        <li><a href="https://bio.umontreal.ca/fr/" class="text-primary hover:underline">Sciences biologiques à UdeM</a></li>
-        <li><a href="https://bio.umontreal.ca/fr/programmes/" class="text-primary hover:underline">Programmes 2e & 3e cycle</a></li>
-        <li><a href="https://biomol.umontreal.ca/fr/" class="text-primary hover:underline">Bio-informatique à UdeM</a></li>
-        <li><a href="https://irbv.umontreal.ca/institute/infrastructure/laboratories/?lang=fr" class="text-primary hover:underline">Laboratoires IRBV</a></li>
-      </ul>
-    </section>
-  </Reveal>
-
-  <!-- Contact -->
-  <Reveal client:load>
-    <section id="contact" class="scroll-mt-24 py-20 bg-[#F7F9FC] dark:bg-slate-800 text-center">
-      <h2 class="text-4xl font-bold">Contact</h2>
-      <p class="mt-6"><strong>Courriel :</strong> landersontrocme at uchicago dot edu</p>
-      <p class="mt-2">
-        <strong>Adresse :</strong><br/>
-        Département de biologie, Université de Montréal,<br/>
-        Campus MIL, bureau B-5411
-      </p>
-    </section>
-  </Reveal>
-
+  <ResearchSection locale={locale} />
+  <TeamSection    locale={locale} />
+  <NewsSection    locale={locale} />
+  <JoinSection    locale={locale} />
+  <ContactSection locale={locale} />
 </Page>
