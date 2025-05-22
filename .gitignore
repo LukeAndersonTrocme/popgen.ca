@@ -1,7 +1,6 @@
 /node_modules
 /.astro
 /misc
-export_snapshot.sh
 src/.DS_Store
 src/content/.DS_Store
 public/assets/team/.DS_Store
