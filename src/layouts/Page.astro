@@ -1,25 +1,23 @@
 ---
 // src/layouts/Page.astro
-/**
- * Props
- *  - title  : string  (required)
- *  - lang   : 'en' | 'fr'
- *  - locale : 'en' | 'fr' (passed to Navbar)
- */
 import Navbar from '../components/Navbar.jsx';
 const { title, lang = 'en', locale = 'en' } = Astro.props;
 ---
 <!DOCTYPE html>
-<html lang={lang} class="dark:bg-slate-900">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content="PopGen Lab at Université de Montréal—computational genomics beyond boundaries." />
+    <meta property="og:image" content="/og.png" />
+    <link rel="stylesheet" href="/styles/fonts.css" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
-  <body class="font-sans text-slate-900 dark:text-slate-50">
-    <Navbar locale={locale} />
-    <main class="prose mx-auto my-12">
+  <body class="font-sans bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-50">
+    <Navbar client:load locale={locale} />
+    <main class="max-w-7xl mx-auto px-4 my-12 prose lg:prose-xl">
       <slot />
     </main>
   </body>

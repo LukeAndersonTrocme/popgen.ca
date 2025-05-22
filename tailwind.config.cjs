@@ -11,6 +11,12 @@ module.exports = {
         cta: '#FFD45C',
         highlight: '#FF9248',
       },
+      fontFamily: {
+        sans: ['"Montserrat Variable"', 'ui-sans-serif', 'system-ui'],
+      },
+      ringColor: {
+        primary: '#0066CC',
+      },
     },
   },
   plugins: [],
