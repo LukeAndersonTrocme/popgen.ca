@@ -1,0 +1,19 @@
+---
+import Page from '../layouts/Page.astro';
+import HeroSection from '../components/sections/HeroSection.astro';
+import ResearchSection from '../components/sections/ResearchSection.astro';
+import TeamSection from '../components/sections/TeamSection.astro';
+import NewsSection from '../components/sections/NewsSection.astro';
+import JoinSection from '../components/sections/JoinSection.astro';
+import ContactSection from '../components/sections/ContactSection.astro';
+const { locale = 'en' } = Astro.props;
+---
+<Page title="PopGen Lab" lang="en" locale={locale}>
+  <HeroSection locale={locale} />
+
+  <ResearchSection locale={locale} />
+  <TeamSection    locale={locale} />
+  <NewsSection    locale={locale} />
+  <JoinSection    locale={locale} />
+  <ContactSection locale={locale} />
+</Page>
