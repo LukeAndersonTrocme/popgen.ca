@@ -1,7 +1,53 @@
 ---
 import Page from '../../layouts/Page.astro';
 import Hero from '../../components/Hero.jsx';
+import Reveal from '../../components/Reveal.jsx';
 ---
 <Page title="Laboratoire PopGen" lang="fr" locale="fr">
   <Hero locale="fr" client:load />
+
+  <Reveal>
+    <section class="py-20 bg-[#F7F9FC] dark:bg-slate-800 text-center">
+      <h2 class="text-4xl font-bold">Notre Recherche</h2>
+      <p class="mt-4 max-w-2xl mx-auto">
+        Nous développons des outils computationnels et des théories pour comprendre comment la dynamique spatiale façonne la diversité génétique à travers les populations et les écosystèmes.
+      </p>
+      <a
+        href="/fr/recherche"
+        class="mt-6 inline-block bg-primary text-white px-6 py-3 rounded hover:bg-primary/80"
+      >
+        Explorer la recherche
+      </a>
+    </section>
+  </Reveal>
+
+  <Reveal>
+    <section class="py-20 bg-white dark:bg-slate-900 text-center">
+      <h2 class="text-4xl font-bold">Rencontrez l’équipe</h2>
+      <p class="mt-4">
+        Luke Anderson-Trocmé, Brian (chat), et peut-être vous bientôt !
+      </p>
+      <a
+        href="/fr/equipe"
+        class="mt-6 inline-block bg-primary text-white px-6 py-3 rounded hover:bg-primary/80"
+      >
+        Voir tous les membres
+      </a>
+    </section>
+  </Reveal>
+
+  <Reveal>
+    <section class="py-20 bg-[#F7F9FC] dark:bg-slate-800 text-center">
+      <h2 class="text-4xl font-bold">Nouvelles & Mises à Jour</h2>
+      <p class="mt-4">
+        Restez informés des dernières publications, projets et événements.
+      </p>
+      <a
+        href="/fr/nouvelles"
+        class="mt-6 inline-block bg-primary text-white px-6 py-3 rounded hover:bg-primary/80"
+      >
+        Lire les nouvelles
+      </a>
+    </section>
+  </Reveal>
 </Page>
