@@ -1,12 +1,14 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { Sun, Moon } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import lottie from 'lottie-web';
+import sunMoonAnim from '../assets/lottie/sun-moon.json';
 
 export default function ModeToggle() {
   const [mode, setMode] = useState('system');
+  const containerRef = useRef(null);
+  const animRef = useRef(null);
 
-  const resolve = (m) => {
-    // SSR guard
+  const resolveMode = (m) => {
     if (typeof window === 'undefined') return 'light';
     if (m === 'system') {
       return window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -17,17 +19,33 @@ export default function ModeToggle() {
   };
 
   useEffect(() => {
-    if (typeof localStorage !== 'undefined') {
-      const stored = localStorage.getItem('color-mode') || 'system';
-      setMode(stored);
-    }
+    const stored = typeof localStorage !== 'undefined'
+      ? localStorage.getItem('color-mode') || 'system'
+      : 'system';
+    setMode(stored);
   }, []);
 
   useEffect(() => {
+    const theme = resolveMode(mode);
     if (typeof document !== 'undefined') {
-      const theme = resolve(mode);
       document.documentElement.classList.toggle('dark', theme === 'dark');
       localStorage.setItem('color-mode', mode);
+    }
+    if (containerRef.current) {
+      if (!animRef.current) {
+        animRef.current = lottie.loadAnimation({
+          container: containerRef.current,
+          renderer: 'svg',
+          loop: false,
+          autoplay: false,
+          animationData: sunMoonAnim,
+        });
+      }
+      if (theme === 'dark') {
+        animRef.current.playSegments([0, 30], true);
+      } else {
+        animRef.current.playSegments([30, 0], true);
+      }
     }
   }, [mode]);
 
@@ -41,7 +59,8 @@ export default function ModeToggle() {
         )
       }
     >
-      {resolve(mode) === 'dark' ? <Sun /> : <Moon />}
+      <div ref={containerRef} className="w-6 h-6" />
+      <span className="sr-only">Dark mode toggle</span>
     </button>
   );
 }

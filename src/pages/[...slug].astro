@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import Page from '../layouts/Page.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const all = await getCollection('pages');
+  return all.map((entry) => {
+    // build path segments: ['fr','recherche'] or ['news']
+    const parts =
+      entry.data.locale === 'fr'
+        ? ['fr', ...(entry.data.slug ? entry.data.slug.split('/') : [])]
+        : entry.data.slug
+        ? entry.data.slug.split('/')
+        : [];
+
+    return {
+      params: { slug: parts },
+      props: { locale: entry.data.locale, slug: entry.data.slug },
+    };
+  });
+}
+
+const { locale, slug } = Astro.props;
+
+// load the matching MDX entry
+const allPages = await getCollection('pages');
+const entry = allPages.find(
+  (p) => p.data.locale === locale && p.data.slug === slug
+);
+
+if (!entry) {
+  throw new Error(`404: no page for ${locale}/${slug}`);
+}
+
+const Content = await entry.render();
+const { data } = entry;
+---
+<Page title={data.title} lang={locale} locale={locale}>
+  <Content />
+</Page>
