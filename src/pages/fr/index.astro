@@ -1,19 +1,21 @@
 ---
-import Page from '../../layouts/Page.astro';
-import HeroSection from '../../components/sections/HeroSection.astro';
+import Page           from '../../layouts/Page.astro';
+import HeroSection    from '../../components/sections/HeroSection.astro';
 import ResearchSection from '../../components/sections/ResearchSection.astro';
-import TeamSection from '../../components/sections/TeamSection.astro';
-import NewsSection from '../../components/sections/NewsSection.astro';
-import JoinSection from '../../components/sections/JoinSection.astro';
+import WhySection     from '../../components/sections/WhySection.astro';
+import TeamSection    from '../../components/sections/TeamSection.astro';
+import NewsSection    from '../../components/sections/NewsSection.astro';
+import JoinSection    from '../../components/sections/JoinSection.astro';
 import ContactSection from '../../components/sections/ContactSection.astro';
+
 const { locale = 'fr' } = Astro.props;
 ---
 <Page title="Laboratoire PopGen" lang="fr" locale={locale}>
-  <HeroSection locale={locale} />
-
-  <ResearchSection locale={locale} />
-  <TeamSection    locale={locale} />
-  <NewsSection    locale={locale} />
-  <JoinSection    locale={locale} />
-  <ContactSection locale={locale} />
+  <HeroSection    client:load locale={locale} />
+  <ResearchSection client:load locale={locale} />
+  <WhySection     client:load locale={locale} />
+  <TeamSection    client:load locale={locale} />
+  <NewsSection    client:load locale={locale} />
+  <JoinSection    client:load locale={locale} />
+  <ContactSection client:load locale={locale} />
 </Page>

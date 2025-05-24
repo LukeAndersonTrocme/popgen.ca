@@ -1,0 +1,40 @@
+---
+// src/components/sections/WhySection.astro
+
+import Reveal from '../Reveal.jsx';
+import enData from '../../content/en/index.json';
+import frData from '../../content/fr/index.json';
+
+const { locale = 'en' } = Astro.props;
+const data = locale === 'fr' ? frData : enData;
+---
+<section id="why" class="relative scroll-mt-24">
+  <!-- Parallax background -->
+  <div
+    class="absolute inset-0 bg-fixed bg-center bg-cover"
+    style="background-image: url('/assets/why-bg.jpg');"
+  ></div>
+
+  <!-- Foreground content -->
+  <div class="relative z-10 max-w-4xl mx-auto px-4 text-center text-white">
+    <!-- Scene 1: Title + Intro -->
+    <Reveal client:load>
+      <div class="py-20">
+        <h2 class="text-5xl font-bold">
+          {locale === 'en' ? 'From geography to genomes' : 'De la géographie aux génomes'}
+        </h2>
+        <p class="mt-4 text-lg">{data.research.intro}</p>
+      </div>
+    </Reveal>
+
+    <!-- Scene 2+: Each research point -->
+    {data.research.points.map((point) => (
+      <Reveal client:load>
+        <div class="py-20">
+          <h3 class="text-3xl font-semibold">{point.title}</h3>
+          <p class="mt-2">{point.desc}</p>
+        </div>
+      </Reveal>
+    ))}
+  </div>
+</section>
