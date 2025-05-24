@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../../tsconfig.json",
   "compilerOptions": {},
-  "include": ["*.astro", "*.ts", "*.js", "*.tsx", "*.jsx"]
+  "include": ["*.astro","*.ts","*.js","*.tsx","*.jsx"]
 }
