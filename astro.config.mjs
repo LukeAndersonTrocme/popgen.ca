@@ -1,4 +1,3 @@
-// --- astro.config.mjs (final) ---
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
@@ -12,4 +11,11 @@ export default defineConfig({
     defaultLocale: 'en',
     locales: ['en', 'fr'],
   },
+  vite: {
+    // Prevent esbuild from attempting to load any tsconfig files
+    esbuild: { tsconfig: false },
+    optimizeDeps: {
+      esbuildOptions: { tsconfig: false }
+    }
+  }
 });
