@@ -11,11 +11,5 @@ export default defineConfig({
     defaultLocale: 'en',
     locales: ['en', 'fr'],
   },
-  vite: {
-    // Prevent esbuild from attempting to load any tsconfig files
-    esbuild: { tsconfig: false },
-    optimizeDeps: {
-      esbuildOptions: { tsconfig: false }
-    }
   }
 });
