@@ -40,3 +40,9 @@ jobs:
           else
             echo "HTTP → HTTPS redirect OK (status $status)"
           fi
+      - name: List TS config files
+        run: |
+          echo "Root tsconfig:"
+          ls -l tsconfig.json
+          echo "Nested configs:"
+          find src/components/sections -maxdepth 1 -type f -print || echo "(none found)"
