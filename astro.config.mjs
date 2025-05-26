@@ -15,15 +15,4 @@ export default defineConfig({
     defaultLocale: 'en',
     locales: ['en', 'fr'],
   },
-  vite: {
-    // Point esbuild directly at our root tsconfig to avoid per-file lookup bugs
-    esbuild: {
-      tsconfig: path.resolve(__dirname, 'tsconfig.json'),
-    },
-    optimizeDeps: {
-      esbuildOptions: {
-        tsconfig: path.resolve(__dirname, 'tsconfig.json'),
-      },
-    },
-  }
 });
