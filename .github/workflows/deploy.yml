@@ -48,3 +48,7 @@ jobs:
           find src/components/sections -maxdepth 1 -type f -print || echo "(none found)"
       - name: Show astro.config.mjs
         run: sed -n '1,200p' astro.config.mjs
+      - name: Debug versions
+        run: |
+          node -v
+          npm ls astro vite
