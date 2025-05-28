@@ -1,7 +1,8 @@
+// src/components/ModeToggle.jsx
 "use client";
 import { useEffect, useState } from "react";
 import { Sun, Moon } from "lucide-react";
-import { Player } from "lottie-react";
+import Lottie from "lottie-react";
 import wink from "@/assets/lottie/cat-wink.json";
 
 export default function ModeToggle() {
@@ -11,13 +12,13 @@ export default function ModeToggle() {
 	// detect reduced-motion preference
 	useEffect(() => {
 		const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-		setPrefersReducedMotion(media.matches);
 		const handler = () => setPrefersReducedMotion(media.matches);
+		handler();
 		media.addEventListener("change", handler);
 		return () => media.removeEventListener("change", handler);
 	}, []);
 
-	// resolve effective theme
+	// determine effective theme
 	const resolve = (m) => {
 		if (typeof window === "undefined") return "light";
 		if (m === "system") {
@@ -28,35 +29,37 @@ export default function ModeToggle() {
 		return m;
 	};
 
-	// load stored mode
+	// load stored mode on mount
 	useEffect(() => {
 		const stored = localStorage.getItem("color-mode") || "system";
 		setMode(stored);
 	}, []);
 
-	// apply theme & persist
+	// apply theme & persist to localStorage
 	useEffect(() => {
 		const theme = resolve(mode);
 		document.documentElement.classList.toggle("dark", theme === "dark");
 		localStorage.setItem("color-mode", mode);
 	}, [mode]);
 
-	// choose icon: Lottie wink in dark, fallback to Sun if reduced-motion, Moon in light
-	const icon =
-		resolve(mode) === "dark" ? (
-			prefersReducedMotion ? (
-				<Sun />
-			) : (
-				<Player
-					autoplay
+	// choose icon: Lottie wink in dark (unless reduced-motion), Sun fallback, Moon for light
+	let icon;
+	if (resolve(mode) === "dark") {
+		if (prefersReducedMotion) {
+			icon = <Sun />;
+		} else {
+			icon = (
+				<Lottie
+					animationData={wink}
+					autoplay={true}
 					loop={false}
-					src={wink}
 					style={{ height: 24, width: 24 }}
 				/>
-			)
-		) : (
-			<Moon />
-		);
+			);
+		}
+	} else {
+		icon = <Moon />;
+	}
 
 	return (
 		<button

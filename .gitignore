@@ -6,3 +6,5 @@ src/content/.DS_Store
 public/assets/team/.DS_Store
 public/assets/team/brian/.DS_Store
 .DS_Store
+/dist/_astro
+/dist
