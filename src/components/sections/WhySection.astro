@@ -1,15 +1,20 @@
 ---
 // src/components/sections/WhySection.astro
+import whyImg from "@/assets/why-bg.jpg";
 import enData from "../../content/en/index.json";
 import frData from "../../content/fr/index.json";
+
 const { locale = "en" } = Astro.props;
 const data = locale === "fr" ? frData : enData;
 ---
 <section id="why" class="relative scroll-mt-24">
+  <!-- Parallax background -->
   <div
     class="absolute inset-0 bg-fixed bg-center bg-cover"
-    style="background-image: url('/assets/why-bg.jpg');"
+    style={`background-image: url("${whyImg}")`}
   ></div>
+
+  <!-- Foreground content -->
   <div class="relative z-10 max-w-4xl mx-auto px-4 text-center text-white">
     <div class="py-20">
       <h2 class="text-5xl font-bold">

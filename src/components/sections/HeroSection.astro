@@ -1,6 +1,21 @@
 ---
 // src/components/sections/HeroSection.astro
-import Hero from "../Hero.jsx";
+import heroImg from "@/assets/hero.jpg";
+import enData from "../../content/en/index.json";
+import frData from "../../content/fr/index.json";
+
 const { locale = "en" } = Astro.props;
+const text = locale === "fr" ? frData.hero : enData.hero;
 ---
-<Hero locale={locale} />
+<section
+  id="home"
+  class="relative h-screen w-full bg-fixed bg-center bg-cover"
+  style={`background-image: url("${heroImg}")`}
+>
+  <div class="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent" />
+  <div class="relative z-10 flex flex-col items-center justify-center h-full px-4 text-center text-white">
+    <h1 class="text-7xl lg:text-8xl font-bold">{text.title}</h1>
+    <p class="mt-4 text-2xl">{text.subtitle}</p>
+    <p class="mt-6 max-w-lg">{text.description}</p>
+  </div>
+</section>

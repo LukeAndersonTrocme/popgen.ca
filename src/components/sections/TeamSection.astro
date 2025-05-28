@@ -1,56 +1,53 @@
 ---
 // src/components/sections/TeamSection.astro
-import Reveal from "../Reveal.jsx";
 import { Card, CardContent } from "../ui/card.jsx";
 import enData from "../../content/en/index.json";
 import frData from "../../content/fr/index.json";
 import lukeImg from "@/assets/team/luke.jpg";
 import brianImg from "@/assets/team/brian.jpg";
 import youImg from "@/assets/team/you.jpg";
+
 const { locale = "en" } = Astro.props;
 const data = locale === "fr" ? frData : enData;
 const { team } = data;
+
 const assets = {
 	"Luke Anderson-Trocmé": lukeImg,
 	Brian: brianImg,
 	"This could be you!": youImg,
 };
 ---
-<Reveal>
-  <section
-    id="people"
-    class="scroll-mt-24 py-20 bg-white dark:bg-slate-900 text-center"
-  >
-    <h2 class="text-4xl font-bold">
-      {locale === 'fr' ? 'Équipe' : 'Meet the Team'}
-    </h2>
-    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      {team.map((m) => {
-        const href = m.slug ? `/${locale === 'fr' ? 'fr/' : ''}${m.slug}` : null;
-        const card = (
-          <Card class="transform hover:scale-105 transition">
-            <CardContent>
-              <div class="w-32 h-32 mx-auto -mt-16 overflow-hidden rounded-full shadow-lg">
-                <img
-                  src={assets[m.name]}
-                  alt={m.name}
-                  class="object-cover w-full h-full"
-                />
-              </div>
-              <h3 class="mt-6 text-xl font-semibold">{m.name}</h3>
-              <p class="text-sm text-slate-600 dark:text-slate-400">{m.role}</p>
-              {m.bio && <p class="mt-2 text-slate-700 dark:text-slate-300">{m.bio}</p>}
-            </CardContent>
-          </Card>
-        );
-        return href ? (
-          <a href={href} class="block" key={m.name}>
-            {card}
-          </a>
-        ) : (
-          <div key={m.name}>{card}</div>
-        );
-      })}
-    </div>
-  </section>
-</Reveal>
+<section
+  id="people"
+  class="scroll-mt-24 py-20 bg-white dark:bg-slate-900 text-center"
+>
+  <h2 class="text-4xl font-bold">
+    {locale === 'fr' ? 'Équipe' : 'Meet the Team'}
+  </h2>
+  <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    {team.map((m) => {
+      const href = m.slug ? `/${locale === 'fr' ? 'fr/' : ''}${m.slug}` : null;
+      const card = (
+        <Card class="transform hover:scale-105 transition">
+          <CardContent>
+            <div class="w-32 h-32 mx-auto -mt-16 overflow-hidden rounded-full shadow-lg">
+              <img
+                src={assets[m.name]}
+                alt={m.name}
+                class="object-cover w-full h-full"
+              />
+            </div>
+            <h3 class="mt-6 text-xl font-semibold">{m.name}</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400">{m.role}</p>
+            {m.bio && <p class="mt-2 text-slate-700 dark:text-slate-300">{m.bio}</p>}
+          </CardContent>
+        </Card>
+      );
+      return href ? (
+        <a href={href} class="block" key={m.name}>{card}</a>
+      ) : (
+        <div key={m.name}>{card}</div>
+      );
+    })}
+  </div>
+</section>
