@@ -15,4 +15,12 @@ export default defineConfig({
     defaultLocale: 'en',
     locales: ['en', 'fr'],
   },
+  vite: {
+    resolve: {
+      alias: {
+        // Map "@/..." to your src/ directory
+        '@': path.resolve(__dirname, 'src'),
+      },
+    },
+  },
 });
