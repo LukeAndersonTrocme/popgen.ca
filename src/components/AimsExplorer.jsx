@@ -1,7 +1,8 @@
+// src/components/AimsExplorer.jsx
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import aims from "@/data/aims.json";
+import aims from "@/data/aims.js"; // ← updated import
 
 export default function AimsExplorer() {
 	const [active, setActive] = useState(null);
