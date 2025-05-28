@@ -1,26 +1,21 @@
 ---
-import Page from '../../layouts/Page.astro';
-import Reveal from '../../components/Reveal.jsx';
-import Gallery from '../../components/Gallery.jsx';
-import { readdirSync } from 'fs';
-import { join } from 'path';
-import { cwd } from 'process';
+import Page from "../../layouts/Page.astro";
+import Reveal from "../../components/Reveal.jsx";
+import Gallery from "../../components/Gallery.jsx";
 
-// Point at <project-root>/public/assets/team/brian
-const folderOnDisk = join(cwd(), 'public', 'assets', 'team', 'brian');
-
-const files = readdirSync(folderOnDisk).filter((f) =>
-  /\.(heic|HEIC|jpe?g|png)$/i.test(f)
+// Glob-import all Brian photos from src/assets/team/brian
+const photoModules = import.meta.globEager(
+	"../../assets/team/brian/*.{jpg,jpeg,png,heic,HEIC}",
 );
-
-const photos = files.map((f) => ({
-  src: `/assets/team/brian/${f}`,
-  alt: `Brian le chat : ${f}`,
+const slides = Object.entries(photoModules).map(([filePath, mod]) => ({
+	src: mod.default,
+	alt: `Brian le chat : ${filePath.split("/").pop()}`,
 }));
 
-const locale = 'fr';
-const title = 'Brian';
-const description = 'Notre mascotte officielle et responsable du bien-être 🐱. Profitez de ces photos !';
+const locale = "fr";
+const title = "Brian";
+const description =
+	"Notre mascotte officielle et responsable du bien-être 🐱. Profitez de ces photos !";
 ---
 <Page title={title} lang="fr" locale={locale}>
   <Reveal client:load>
@@ -29,7 +24,7 @@ const description = 'Notre mascotte officielle et responsable du bien-être 🐱
       <p class="mt-4 mx-auto max-w-2xl">{description}</p>
 
       {/* Galerie légère React */}
-      <Gallery slides={photos} client:load />
+      <Gallery slides={slides} client:load />
     </section>
   </Reveal>
 </Page>
