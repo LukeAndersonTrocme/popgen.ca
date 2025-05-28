@@ -1,12 +1,13 @@
 ---
-import Reveal from '../Reveal.jsx';
-import enData from '../../content/en/index.json';
-import frData from '../../content/fr/index.json';
-const { locale = 'en' } = Astro.props;
-const data = locale === 'fr' ? frData : enData;
+// src/components/sections/ResearchSection.astro
+import Reveal from "../Reveal.jsx";
+import enData from "../../content/en/index.json";
+import frData from "../../content/fr/index.json";
+const { locale = "en" } = Astro.props;
+const data = locale === "fr" ? frData : enData;
 const { research } = data;
 ---
-<Reveal client:load>
+<Reveal>
   <section
     id="research"
     class="scroll-mt-24 py-20 bg-[#F7F9FC] dark:bg-slate-800 text-center"

@@ -1,9 +1,9 @@
 ---
+// src/pages/brian.astro
 import Page from "../layouts/Page.astro";
 import Reveal from "../components/Reveal.jsx";
 import Gallery from "../components/Gallery.jsx";
 
-// Eagerly import every image under src/assets/team/brian
 const photoModules = import.meta.glob(
 	"../assets/team/brian/*.{jpg,jpeg,png,heic,HEIC}",
 	{ eager: true },
@@ -19,12 +19,10 @@ const description =
 	"Our official lab mascot and wellness officer 🐱. Enjoy these snapshots!";
 ---
 <Page title={title} lang="en" locale={locale}>
-  <Reveal client:load>
+  <Reveal>
     <section class="py-20 text-center">
       <h1 class="text-5xl font-bold">{title}</h1>
       <p class="mt-4 mx-auto max-w-2xl">{description}</p>
-
-      {/* React-powered lightbox gallery */}
       <Gallery slides={slides} client:load />
     </section>
   </Reveal>
