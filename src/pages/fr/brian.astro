@@ -3,9 +3,10 @@ import Page from "../../layouts/Page.astro";
 import Reveal from "../../components/Reveal.jsx";
 import Gallery from "../../components/Gallery.jsx";
 
-// Glob-import all Brian photos from src/assets/team/brian
-const photoModules = import.meta.globEager(
+// Eagerly import every image under src/assets/team/brian
+const photoModules = import.meta.glob(
 	"../../assets/team/brian/*.{jpg,jpeg,png,heic,HEIC}",
+	{ eager: true },
 );
 const slides = Object.entries(photoModules).map(([filePath, mod]) => ({
 	src: mod.default,
