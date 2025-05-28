@@ -1,16 +1,13 @@
 ---
 // src/components/sections/AimsSection.astro
-import Reveal from "../Reveal.jsx";
 import AimsExplorer from "../AimsExplorer.jsx";
 const { locale = "en" } = Astro.props;
 ---
-<Reveal>
-  <section id="aims" class="scroll-mt-24 py-20 bg-white dark:bg-slate-900 text-center">
-    <h2 class="text-4xl font-bold">
-      {locale === 'fr' ? 'Axes de recherche' : 'Research Aims'}
-    </h2>
-    <div class="mt-8">
-      <AimsExplorer client:load />
-    </div>
-  </section>
-</Reveal>
+<section id="aims" class="scroll-mt-24 py-20 bg-white dark:bg-slate-900 text-center">
+  <h2 class="text-4xl font-bold">
+    {locale === 'fr' ? 'Axes de recherche' : 'Research Aims'}
+  </h2>
+  <div class="mt-8">
+    <AimsExplorer client:load />
+  </div>
+</section>

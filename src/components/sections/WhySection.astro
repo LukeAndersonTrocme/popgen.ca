@@ -1,6 +1,5 @@
 ---
 // src/components/sections/WhySection.astro
-import Reveal from "../Reveal.jsx";
 import enData from "../../content/en/index.json";
 import frData from "../../content/fr/index.json";
 const { locale = "en" } = Astro.props;
@@ -12,21 +11,17 @@ const data = locale === "fr" ? frData : enData;
     style="background-image: url('/assets/why-bg.jpg');"
   ></div>
   <div class="relative z-10 max-w-4xl mx-auto px-4 text-center text-white">
-    <Reveal>
-      <div class="py-20">
-        <h2 class="text-5xl font-bold">
-          {locale === 'en' ? 'From geography to genomes' : 'De la géographie aux génomes'}
-        </h2>
-        <p class="mt-4 text-lg">{data.research.intro}</p>
-      </div>
-    </Reveal>
+    <div class="py-20">
+      <h2 class="text-5xl font-bold">
+        {locale === 'en' ? 'From geography to genomes' : 'De la géographie aux génomes'}
+      </h2>
+      <p class="mt-4 text-lg">{data.research.intro}</p>
+    </div>
     {data.research.points.map((point) => (
-      <Reveal>
-        <div class="py-20">
-          <h3 class="text-3xl font-semibold">{point.title}</h3>
-          <p class="mt-2">{point.desc}</p>
-        </div>
-      </Reveal>
+      <div class="py-20">
+        <h3 class="text-3xl font-semibold">{point.title}</h3>
+        <p class="mt-2">{point.desc}</p>
+      </div>
     ))}
   </div>
 </section>

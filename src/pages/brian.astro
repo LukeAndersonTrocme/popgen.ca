@@ -1,7 +1,6 @@
 ---
 // src/pages/brian.astro
 import Page from "../layouts/Page.astro";
-import Reveal from "../components/Reveal.jsx";
 import Gallery from "../components/Gallery.jsx";
 
 const photoModules = import.meta.glob(
@@ -13,17 +12,14 @@ const slides = Object.entries(photoModules).map(([filePath, mod]) => ({
 	alt: `Brian photo: ${filePath.split("/").pop()}`,
 }));
 
-const locale = "en";
 const title = "Brian";
 const description =
 	"Our official lab mascot and wellness officer 🐱. Enjoy these snapshots!";
 ---
-<Page title={title} lang="en" locale={locale}>
-  <Reveal>
-    <section class="py-20 text-center">
-      <h1 class="text-5xl font-bold">{title}</h1>
-      <p class="mt-4 mx-auto max-w-2xl">{description}</p>
-      <Gallery slides={slides} client:load />
-    </section>
-  </Reveal>
+<Page title={title} lang="en" locale="en">
+  <section class="py-20 text-center">
+    <h1 class="text-5xl font-bold">{title}</h1>
+    <p class="mt-4 mx-auto max-w-2xl">{description}</p>
+    <Gallery slides={slides} client:load />
+  </section>
 </Page>
