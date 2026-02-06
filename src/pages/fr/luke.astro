@@ -1,6 +1,6 @@
 ---
-import Page from '../../layouts/Page.astro';
-import Reveal from '../../components/Reveal.jsx';
+import Page from "../../layouts/Page.astro";
+import Reveal from "../../components/Reveal.jsx";
 ---
 <Page title="Luke Anderson-Trocmé – PopGen Lab" lang="fr" locale="fr">
   <Reveal client:load>
@@ -10,6 +10,9 @@ import Reveal from '../../components/Reveal.jsx';
           src="/assets/team/luke.jpg"
           alt="Luke Anderson-Trocmé"
           class="w-48 h-48 rounded-full object-cover shadow-lg"
+          width={192}
+          height={192}
+          loading="lazy"
         />
         <div>
           <h1 class="text-4xl font-bold">Luke Anderson-Trocmé</h1>

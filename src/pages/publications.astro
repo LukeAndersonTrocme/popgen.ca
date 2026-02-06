@@ -1,21 +1,43 @@
 ---
-import Page from '../layouts/Page.astro';
-import publications from '../data/publications.json';
+import Page from "../layouts/Page.astro";
+import publications from "../data/publications.json";
+
+// Group by year, descending
+const byYear = publications.reduce((acc, p) => {
+	(acc[p.year] = acc[p.year] || []).push(p);
+	return acc;
+}, {});
+const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
 ---
-<Page title="Publications – PopGen Lab" lang="en" locale="en">
-  <h1>Publications</h1>
-  <ul>
-    {publications.map((p) => (
-      <li>
-        <a
-          href={p.doi ? `https://doi.org/${p.doi}` : p.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="hover:underline"
-        >
-          {p.title} (<em>{p.journal}, {p.year}</em>)
-        </a>
-      </li>
+<Page
+  title="Publications – PopGen Lab"
+  lang="en"
+  locale="en"
+  description="Publications from the Anderson-Trocmé Lab at Université de Montréal."
+>
+  <section class="py-12 max-w-4xl mx-auto">
+    <h1 class="text-4xl font-bold">Publications</h1>
+    {years.map((year) => (
+      <div class="mt-10">
+        <h2 class="text-2xl font-semibold text-primary">{year}</h2>
+        <ul class="mt-4 space-y-4">
+          {byYear[year].map((p) => (
+            <li class="border-l-4 border-slate-200 dark:border-slate-700 pl-4">
+              <a
+                href={p.doi ? `https://doi.org/${p.doi}` : p.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:underline font-medium"
+              >
+                {p.title}
+              </a>
+              <p class="text-sm text-slate-600 dark:text-slate-400">
+                <em>{p.journal}</em>
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
     ))}
-  </ul>
+  </section>
 </Page>

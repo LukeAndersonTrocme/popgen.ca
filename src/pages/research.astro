@@ -1,7 +1,25 @@
 ---
-import Page from '../layouts/Page.astro';
-import Content from '../content/en/research.md';
+import Page from "../layouts/Page.astro";
+import data from "../content/en/index.json";
+const { research } = data;
 ---
-<Page title="Research – PopGen Lab" lang="en" locale="en">
-  <Content />
+<Page
+  title="Research – PopGen Lab"
+  lang="en"
+  locale="en"
+  description="Research at PopGen Lab — spatial genetics, ancestral recombination graphs, genealogical modeling, and conservation genomics."
+>
+  <section class="py-12 max-w-4xl mx-auto px-4">
+    <h1 class="text-4xl font-bold">Our Research</h1>
+    <p class="mt-6 text-lg">{research.intro}</p>
+
+    <div class="mt-12 space-y-12">
+      {research.points.map((point) => (
+        <div class="border-l-4 border-primary pl-6">
+          <h2 class="text-2xl font-semibold">{point.title}</h2>
+          <p class="mt-2 text-slate-700 dark:text-slate-300">{point.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
 </Page>

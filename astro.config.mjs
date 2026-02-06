@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
+import sitemap from '@astrojs/sitemap';
 import { fileURLToPath } from 'url';
 import path from 'path';
 
@@ -9,7 +10,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   site: 'https://popgen.ca',
   output: 'static',        // static build is built-in in Astro 4
-  integrations: [tailwind(), react()],
+  integrations: [tailwind(), react(), sitemap()],
   markdown: { syntaxHighlight: 'prism' },
   i18n: {
     defaultLocale: 'en',

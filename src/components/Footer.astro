@@ -1,0 +1,83 @@
+---
+const { locale = "en" } = Astro.props;
+
+const navItems =
+	locale === "fr"
+		? [
+				{ label: "Recherche", href: "/fr/recherche" },
+				{ label: "Équipe", href: "/fr/equipe" },
+				{ label: "Publications", href: "/fr/publications" },
+				{ label: "Nouvelles", href: "/fr/nouvelles" },
+				{ label: "Rejoindre", href: "/fr/rejoindre" },
+				{ label: "Contact", href: "/fr/contact" },
+			]
+		: [
+				{ label: "Research", href: "/research" },
+				{ label: "People", href: "/people" },
+				{ label: "Publications", href: "/publications" },
+				{ label: "News", href: "/news" },
+				{ label: "Join", href: "/join" },
+				{ label: "Contact", href: "/contact" },
+			];
+---
+<footer class="bg-slate-900 text-slate-300 py-12 mt-12">
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- Lab info -->
+    <div>
+      <h3 class="text-white font-bold text-lg">PopGen Lab</h3>
+      <p class="mt-2 text-sm">
+        Anderson-Trocmé Lab<br />
+        Département de biologie<br />
+        Université de Montréal<br />
+        Campus MIL, bureau B-5411
+      </p>
+    </div>
+
+    <!-- Quick links -->
+    <div>
+      <h3 class="text-white font-bold text-lg">
+        {locale === 'fr' ? 'Liens rapides' : 'Quick Links'}
+      </h3>
+      <ul class="mt-2 space-y-1">
+        {navItems.map((item) => (
+          <li>
+            <a href={item.href} class="text-sm hover:text-white transition">
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- External links -->
+    <div>
+      <h3 class="text-white font-bold text-lg">
+        {locale === 'fr' ? 'Liens externes' : 'External'}
+      </h3>
+      <ul class="mt-2 space-y-1">
+        <li>
+          <a href="https://scholar.google.ca/citations?hl=en&pli=1&user=5ZUZPIAAAAAJ"
+             target="_blank" rel="noopener noreferrer" class="text-sm hover:text-white transition">
+            Google Scholar
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/LukeAndersonTrocme"
+             target="_blank" rel="noopener noreferrer" class="text-sm hover:text-white transition">
+            GitHub
+          </a>
+        </li>
+        <li>
+          <a href="https://orcid.org/0000-0001-9187-2792"
+             target="_blank" rel="noopener noreferrer" class="text-sm hover:text-white transition">
+            ORCID
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 mt-8 pt-8 border-t border-slate-700 text-center text-sm text-slate-500">
+    &copy; {new Date().getFullYear()} Anderson-Trocmé Lab, Université de Montréal
+  </div>
+</footer>

@@ -1,7 +1,61 @@
 ---
-import Page from '../layouts/Page.astro';
-import Content from '../content/en/join.md';
+import Page from "../layouts/Page.astro";
+import data from "../content/en/index.json";
+const { join, links } = data;
 ---
-<Page title="How to Join – PopGen Lab" lang="en" locale="en">
-  <Content />
+<Page title="Join the Lab – PopGen Lab" lang="en" locale="en" description="Join the PopGen Lab — MSc, PhD, and postdoc positions in computational population genetics at Université de Montréal.">
+  <section class="py-12 max-w-4xl mx-auto px-4">
+    <h1 class="text-4xl font-bold">Join the Lab</h1>
+    <p class="mt-6 text-lg">{join.pitch}</p>
+
+    <div class="mt-12 space-y-10">
+      <div>
+        <h2 class="text-2xl font-semibold">What We Do</h2>
+        <p class="mt-3 text-slate-700 dark:text-slate-300">
+          The PopGen Lab is a fully computational research group working at the intersection of population genetics,
+          evolutionary biology, statistics, and computer science. Our projects focus on building quantitative tools
+          to understand how populations are shaped by history, geography, and demography.
+        </p>
+        <p class="mt-3 text-slate-700 dark:text-slate-300">
+          Research in the lab is inherently interdisciplinary. Students come from backgrounds in bioinformatics,
+          computational biology, computer science, statistics, genetics, and evolutionary biology, and bring
+          different ways of thinking about data, models, and biological questions.
+        </p>
+        <ul class="mt-3 space-y-2 list-disc list-inside text-slate-700 dark:text-slate-300">
+          <li>Developing statistical and computational methods</li>
+          <li>Working with large-scale genomic and genealogical datasets</li>
+          <li>Designing and running simulations of evolutionary and demographic processes</li>
+          <li>Building visualizations and exploratory analyses to understand complex structure</li>
+        </ul>
+        <p class="mt-3 text-slate-700 dark:text-slate-300">
+          Most projects involve substantial coding and quantitative reasoning. While prior experience with programming
+          is important, students arrive with different strengths, and projects are shaped to build on both biological
+          insight and technical skill.
+        </p>
+      </div>
+
+      <div class="border-l-4 border-primary pl-6 py-4 bg-slate-50 dark:bg-slate-800 rounded-r-lg">
+        <h2 class="text-2xl font-semibold">Current Opportunities</h2>
+        <p class="mt-3 text-slate-700 dark:text-slate-300">
+          {join.cta}
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-semibold">Program Links</h2>
+        <div class="mt-4 flex flex-wrap gap-3">
+          {links.map((l) => (
+            <a
+              href={l.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition text-sm"
+            >
+              {l.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
 </Page>

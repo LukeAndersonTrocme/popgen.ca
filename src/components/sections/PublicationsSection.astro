@@ -1,0 +1,38 @@
+---
+import publications from "../../data/publications.json";
+
+const { locale = "en" } = Astro.props;
+
+const featured = publications.slice(0, 4);
+---
+<section
+  id="publications"
+  class="scroll-mt-24 py-20 bg-[#F7F9FC] dark:bg-slate-800 text-center"
+>
+  <h2 class="text-4xl font-bold">
+    {locale === 'fr' ? 'Publications sélectionnées' : 'Selected Publications'}
+  </h2>
+  <ul class="mt-8 max-w-2xl mx-auto space-y-4 text-left px-4">
+    {featured.map((p) => (
+      <li class="border-l-4 border-primary pl-4">
+        <a
+          href={p.doi ? `https://doi.org/${p.doi}` : p.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:underline"
+        >
+          <strong>{p.title}</strong>
+        </a>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          <em>{p.journal}</em>, {p.year}
+        </p>
+      </li>
+    ))}
+  </ul>
+  <a
+    href={locale === 'fr' ? '/fr/publications' : '/publications'}
+    class="mt-8 inline-block text-primary hover:underline font-semibold"
+  >
+    {locale === 'fr' ? 'Voir toutes les publications →' : 'View all publications →'}
+  </a>
+</section>

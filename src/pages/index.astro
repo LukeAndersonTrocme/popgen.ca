@@ -1,20 +1,20 @@
 ---
-import Page from '../layouts/Page.astro';
-import HeroSection from '../components/sections/HeroSection.astro';
-import ResearchSection from '../components/sections/ResearchSection.astro';
-import WhySection from '../components/sections/WhySection.astro';
-import TeamSection from '../components/sections/TeamSection.astro';
-import NewsSection from '../components/sections/NewsSection.astro';
-import JoinSection from '../components/sections/JoinSection.astro';
-import ContactSection from '../components/sections/ContactSection.astro';
+import Page from "../layouts/Page.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import WhySection from "../components/sections/WhySection.astro";
+import TeamSection from "../components/sections/TeamSection.astro";
+import PublicationsSection from "../components/sections/PublicationsSection.astro";
+import NewsSection from "../components/sections/NewsSection.astro";
+import JoinSection from "../components/sections/JoinSection.astro";
+import ContactSection from "../components/sections/ContactSection.astro";
 
-const { locale = 'en' } = Astro.props;
+const { locale = "en" } = Astro.props;
 ---
-<Page title="PopGen Lab" lang="en" locale={locale}>
+<Page title="PopGen Lab" lang="en" locale={locale} description="PopGen Lab — computational population genetics at Université de Montréal. We study how ancestry spreads across space and time.">
   <HeroSection locale={locale} />
-  <ResearchSection locale={locale} />
   <WhySection locale={locale} />
   <TeamSection locale={locale} />
+  <PublicationsSection locale={locale} />
   <NewsSection locale={locale} />
   <JoinSection locale={locale} />
   <ContactSection locale={locale} />
