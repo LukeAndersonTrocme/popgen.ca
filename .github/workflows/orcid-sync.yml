@@ -16,13 +16,13 @@ jobs:
         run: |
           curl -s https://pub.orcid.org/v3.0/0000-0001-9187-2792/works \
             -H "Accept: application/json" \
-            | jq '.group[] .["work-summary"][] | {
+            | jq '[.group[] | .["work-summary"][0] | {
                 title: .title.title.value,
-                journal: .journal-title.value,
-                year: .publication-date.year.value,
-                doi: (.external-ids["external-id"][0].external-id-value // "")
-              }' \
-            | jq -s '.' > src/data/publications.json
+                journal: (."journal-title".value // ""),
+                year: (."publication-date".year.value | tonumber),
+                doi: ((.["external-ids"]["external-id"] // []) | map(select(.["external-id-type"] == "doi")) | .[0]["external-id-value"] // ""),
+                url: ((.["external-ids"]["external-id"] // []) | map(select(.["external-id-type"] == "doi")) | .[0]["external-id-value"] // "") | if . != "" then "https://doi.org/\(.)" else "" end
+              }] | sort_by(.year) | reverse' > src/data/publications.json
 
       - name: Commit & push
         run: |

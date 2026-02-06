@@ -1,0 +1,80 @@
+---
+import Page from '../layouts/Page.astro';
+import Reveal from '../components/Reveal.jsx';
+---
+<Page title="Luke Anderson-Trocmé – PopGen Lab" lang="en" locale="en">
+  <Reveal client:load>
+    <section class="py-20 max-w-4xl mx-auto px-4">
+      <div class="flex flex-col md:flex-row gap-8 items-start">
+        <img
+          src="/assets/team/luke.jpg"
+          alt="Luke Anderson-Trocmé"
+          class="w-48 h-48 rounded-full object-cover shadow-lg"
+        />
+        <div>
+          <h1 class="text-4xl font-bold">Luke Anderson-Trocmé</h1>
+          <p class="text-xl text-gray-600 dark:text-gray-400 mt-2">
+            Assistant Professor of Population Genetics
+          </p>
+          <p class="text-gray-600 dark:text-gray-400">
+            Université de Montréal
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-12 prose dark:prose-invert max-w-none">
+        <h2>Research</h2>
+        <p>
+          My research investigates how genetic ancestry spreads across space and time,
+          and how demographic history shapes patterns of genetic diversity. I combine
+          large-scale genealogical records with population-genomic data to develop
+          statistical, computational, and simulation-based methods that treat ancestry
+          as a spatial and temporal process rather than a static label. This work
+          integrates data analysis, model development, and visualization to connect
+          real demographic history to observed genetic variation.
+        </p>
+        <p>
+          A central contribution of my research is a first-author <em>Science</em> (2023)
+          study on French Canadians, which integrated multi-century genealogies with
+          genome-wide data to show that much of today's fine-scale population structure
+          can be explained by recent demographic processes such as settlement history,
+          migration, and founder effects. Building on this foundation, my current work
+          develops empirically grounded pedigree and genome simulation tools, spatial
+          ancestry statistics, and scalable methods for biobank-scale and comparative
+          analyses in both human and conservation genetics.
+        </p>
+
+        <h2>Background</h2>
+        <ul>
+          <li><strong>PhD</strong> – McGill University (2022)</li>
+          <li><strong>MSc</strong> – McGill University (2016)</li>
+          <li><strong>NSERC Postdoctoral Fellowship</strong> awardee</li>
+        </ul>
+
+        <h2>Links</h2>
+        <div class="flex flex-wrap gap-4 not-prose">
+          <a href="https://scholar.google.ca/citations?hl=en&pli=1&user=5ZUZPIAAAAAJ" target="_blank" rel="noopener noreferrer"
+             class="px-4 py-2 bg-primary text-white rounded hover:opacity-90">Google Scholar</a>
+          <a href="https://orcid.org/0000-0001-9187-2792" target="_blank" rel="noopener noreferrer"
+             class="px-4 py-2 bg-primary text-white rounded hover:opacity-90">ORCID</a>
+          <a href="https://github.com/LukeAndersonTrocme" target="_blank" rel="noopener noreferrer"
+             class="px-4 py-2 bg-gray-800 text-white rounded hover:opacity-90">GitHub</a>
+        </div>
+
+        <h2>Software</h2>
+        <ul>
+          <li>
+            <a href="https://github.com/LukeAndersonTrocme/LegacyData" target="_blank" rel="noopener noreferrer">
+              <strong>LegacyData</strong>
+            </a> – Code for "Legacy data confound genomics studies" (MBE, 2020)
+          </li>
+          <li>
+            <a href="https://github.com/LukeAndersonTrocme/genes_in_space" target="_blank" rel="noopener noreferrer">
+              <strong>genes_in_space</strong>
+            </a> – Spatial analysis of genetic variation
+          </li>
+        </ul>
+      </div>
+    </section>
+  </Reveal>
+</Page>

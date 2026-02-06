@@ -6,15 +6,15 @@ export default function Hero({ locale = 'en' }) {
   const text = locale === 'en'
     ? {
         title: 'Genomics Beyond Boundaries',
-        subtitle: 'Opening Our Doors Fall 2025',
+        subtitle: 'Launching at UdeM',
         description:
           'Our lab uses powerful computational methods to map how genetic information spreads across landscapes and generations.',
       }
     : {
         title: 'La génomique sans frontières',
-        subtitle: "Ouverture officielle à l'automne 2025",
+        subtitle: "Lancement à l'UdeM",
         description:
-          'Notre labo utilise des méthodes computationnelles pour cartographier comment l’information génétique se propage.',
+          "Notre labo utilise des méthodes computationnelles pour cartographier comment l'information génétique se propage.",
       };
 
   return (

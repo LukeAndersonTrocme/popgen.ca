@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "Genomics Beyond Boundaries",
-    "subtitle": "Opening Our Doors Fall 2025",
+    "subtitle": "Launching at UdeM",
     "description": "Our lab uses powerful computational methods to map how genetic information spreads across landscapes and generations. By tracking ancestry through space and time, we uncover patterns crucial for understanding evolution, human history, and biodiversity conservation."
   },
   "research": {
@@ -33,7 +33,8 @@
     {
       "name": "Luke Anderson-Trocmé",
       "role": "Principal Investigator",
-      "img": "/assets/team/luke.jpg"
+      "img": "/assets/team/luke.jpg",
+      "slug": "luke"
     },
     {
       "name": "Brian",
@@ -48,6 +49,21 @@
     }
   ],
   "news": [
+    {
+      "date": "January 2026",
+      "headline": "New paper in Genetics",
+      "desc": "Our paper on ARGs, pedigrees, and genetic relatedness matrices is now published in Genetics."
+    },
+    {
+      "date": "January 2026",
+      "headline": "Quebec reference panel published",
+      "desc": "A multi-ancestry genetic reference for the Quebec population is now out in Nature Communications."
+    },
+    {
+      "date": "August 2025",
+      "headline": "Lab launch",
+      "desc": "The Anderson-Trocmé Lab officially opens at Université de Montréal."
+    },
     {
       "date": "May 2025",
       "headline": "Hello World!",

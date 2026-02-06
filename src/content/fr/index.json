@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "La génomique sans frontières",
-    "subtitle": "Ouverture officielle à l'automne 2025",
+    "subtitle": "Lancement à l'UdeM",
     "description": "Notre labo utilise des méthodes computationnelles puissantes pour cartographier comment l’information génétique se propage à travers les paysages et les générations. En suivant l’ascendance dans l’espace et le temps, nous révélons des motifs cruciaux pour comprendre l’évolution, l’histoire humaine et la conservation de la biodiversité."
   },
   "research": {
@@ -33,7 +33,8 @@
     {
       "name": "Luke Anderson-Trocmé",
       "role": "Investigateur principal",
-      "img": "/assets/team/luke.jpg"
+      "img": "/assets/team/luke.jpg",
+      "slug": "luke"
     },
     {
       "name": "Brian",
@@ -49,9 +50,24 @@
   ],
   "news": [
     {
+      "date": "janvier 2026",
+      "headline": "Nouvel article dans Genetics",
+      "desc": "Notre article sur les ARGs, les pédigrées et les matrices de parenté génétique est maintenant publié dans Genetics."
+    },
+    {
+      "date": "janvier 2026",
+      "headline": "Panel de référence québécois publié",
+      "desc": "Un panel de référence génétique multi-ancestral pour la population québécoise est maintenant disponible dans Nature Communications."
+    },
+    {
+      "date": "août 2025",
+      "headline": "Lancement du labo",
+      "desc": "Le laboratoire Anderson-Trocmé ouvre officiellement ses portes à l'Université de Montréal."
+    },
+    {
       "date": "mai 2025",
       "headline": "Hello World !",
-      "desc": "Notre site web est maintenant en ligne. Restez à l’écoute pour des mises à jour sur nos projets, publications et plus encore !"
+      "desc": "Notre site web est maintenant en ligne. Restez à l'écoute pour des mises à jour sur nos projets, publications et plus encore !"
     }
   ],
   "links": [
