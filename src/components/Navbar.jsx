@@ -13,6 +13,8 @@ const routes = {
 		news: "/news",
 		join: "/join",
 		contact: "/contact",
+		luke: "/luke",
+		brian: "/brian",
 		switch: "/fr",
 		switchLabel: "Français",
 		homeLabel: "Home",
@@ -31,6 +33,8 @@ const routes = {
 		news: "/fr/nouvelles",
 		join: "/fr/rejoindre",
 		contact: "/fr/contact",
+		luke: "/fr/luke",
+		brian: "/fr/brian",
 		switch: "/",
 		switchLabel: "English",
 		homeLabel: "Accueil",
@@ -43,8 +47,39 @@ const routes = {
 	},
 };
 
-export default function Navbar({ locale = "en" }) {
+// Map paths between languages
+const pathMapping = {
+	en: {
+		"/": "/fr/",
+		"/research": "/fr/recherche",
+		"/people": "/fr/equipe",
+		"/publications": "/fr/publications",
+		"/news": "/fr/nouvelles",
+		"/join": "/fr/rejoindre",
+		"/contact": "/fr/contact",
+		"/luke": "/fr/luke",
+		"/brian": "/fr/brian",
+	},
+	fr: {
+		"/fr/": "/",
+		"/fr": "/",
+		"/fr/recherche": "/research",
+		"/fr/equipe": "/people",
+		"/fr/publications": "/publications",
+		"/fr/nouvelles": "/news",
+		"/fr/rejoindre": "/join",
+		"/fr/contact": "/contact",
+		"/fr/luke": "/luke",
+		"/fr/brian": "/brian",
+	},
+};
+
+export default function Navbar({ locale = "en", currentPath = "/" }) {
 	const r = routes[locale];
+
+	// Get the language-switched path, defaulting to home if not found
+	const switchPath =
+		pathMapping[locale][currentPath] || (locale === "en" ? "/fr/" : "/");
 	const [scrolled, setScrolled] = useState(false);
 	const [open, setOpen] = useState(false);
 
@@ -94,7 +129,7 @@ export default function Navbar({ locale = "en" }) {
 					))}
 					<li className="flex items-center space-x-2">
 						<ModeToggle />
-						<a href={r.switch} className="font-semibold hover:text-highlight">
+						<a href={switchPath} className="font-semibold hover:text-highlight">
 							{r.switchLabel}
 						</a>
 					</li>
@@ -103,7 +138,7 @@ export default function Navbar({ locale = "en" }) {
 				{/* Mobile burger */}
 				<div className="md:hidden flex items-center space-x-4">
 					<ModeToggle />
-					<a href={r.switch} className="font-semibold">
+					<a href={switchPath} className="font-semibold">
 						{r.switchLabel}
 					</a>
 					<Sheet open={open} onOpenChange={setOpen}>

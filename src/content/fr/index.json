@@ -33,7 +33,7 @@
     {
       "name": "Luke Anderson-Trocmé",
       "role": "Investigateur principal",
-      "img": "/assets/team/luke.jpg",
+      "img": "/assets/team/luke_crop.jpg",
       "slug": "luke",
       "bio": ""
     },
@@ -84,11 +84,7 @@
     },
     {
       "label": "Bio-informatique à UdeM",
-      "url": "https://biomol.umontreal.ca/fr/"
-    },
-    {
-      "label": "Laboratoires IRBV",
-      "url": "https://irbv.umontreal.ca/institute/infrastructure/laboratories/?lang=fr"
+      "url": "https://biochimie.umontreal.ca/etudes/bio-informatique/"
     }
   ],
   "join": {

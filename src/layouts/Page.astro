@@ -8,6 +8,9 @@ const {
 	locale = "en",
 	description = "PopGen Lab at Université de Montréal — computational genomics beyond boundaries.",
 } = Astro.props;
+
+// Get the current URL path for language switching
+const currentPath = Astro.url.pathname;
 ---
 <!DOCTYPE html>
 <html lang={lang} class="scroll-smooth">
@@ -23,7 +26,7 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body class="font-sans bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-50">
-    <Navbar client:idle locale={locale} />
+    <Navbar client:idle locale={locale} currentPath={currentPath} />
     <main>
       <slot />
     </main>
