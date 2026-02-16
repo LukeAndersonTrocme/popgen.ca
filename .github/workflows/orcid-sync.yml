@@ -21,7 +21,7 @@ jobs:
                 journal: (."journal-title".value // ""),
                 year: (."publication-date".year.value | tonumber),
                 doi: ((.["external-ids"]["external-id"] // []) | map(select(.["external-id-type"] == "doi")) | .[0]["external-id-value"] // ""),
-                url: ((.["external-ids"]["external-id"] // []) | map(select(.["external-id-type"] == "doi")) | .[0]["external-id-value"] // "") | if . != "" then "https://doi.org/\(.)" else "" end
+                url: (((.["external-ids"]["external-id"] // []) | map(select(.["external-id-type"] == "doi")) | .[0]["external-id-value"] // "") as $doi | if $doi != "" then "https://doi.org/\($doi)" else "" end)
               }] | sort_by(.year) | reverse' > src/data/publications.json
 
       - name: Commit & push
