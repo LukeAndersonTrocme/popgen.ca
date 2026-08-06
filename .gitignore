@@ -6,3 +6,20 @@ src/content/.DS_Store
 public/assets/team/.DS_Store
 public/assets/team/brian/.DS_Store
 .DS_Store
+
+# Private — keep local, never push
+/CLAUDE.md
+/CONTEXT.md
+/docs/
+
+# Luke Zone — unpublished blog, not ready to ship
+/src/components/LukezoneEffects.jsx
+/src/components/LukezoneThemeSwitcher.jsx
+/src/content/config.ts
+/src/content/lukezone/
+/src/layouts/LukezoneLayout.astro
+/src/pages/lukezone/
+/src/styles/
+/dist/lukezone/
+dist/_astro/Lukezone*.js
+dist/_astro/_slug_.*
