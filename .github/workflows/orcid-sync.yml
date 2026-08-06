@@ -6,11 +6,16 @@ on:
   schedule:
     - cron: '0 0 * * 0'  # weekly on Sundays UTC
 
+# The git push in the final step needs write access to the repo.
+# Without this the default GITHUB_TOKEN is read-only and git exits 128.
+permissions:
+  contents: write
+
 jobs:
   fetch-orcid:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Fetch ORCID works
         run: |
@@ -19,7 +24,7 @@ jobs:
             | jq '[.group[] | .["work-summary"][0] | {
                 title: .title.title.value,
                 journal: (."journal-title".value // ""),
-                year: (."publication-date".year.value | tonumber),
+                year: ((."publication-date".year.value // "0") | tonumber),
                 doi: ((.["external-ids"]["external-id"] // []) | map(select(.["external-id-type"] == "doi")) | .[0]["external-id-value"] // ""),
                 url: (((.["external-ids"]["external-id"] // []) | map(select(.["external-id-type"] == "doi")) | .[0]["external-id-value"] // "") as $doi | if $doi != "" then "https://doi.org/\($doi)" else "" end)
               }] | sort_by(.year) | reverse' > src/data/publications.json
