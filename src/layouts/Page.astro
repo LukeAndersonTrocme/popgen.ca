@@ -23,7 +23,20 @@ const currentPath = Astro.url.pathname;
     <meta property="og:description" content={description} />
     <meta property="og:image" content="/og.jpg" />
     <link rel="stylesheet" href="/styles/fonts.css" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <!-- Anti-FOUC: apply saved color mode before first paint -->
+    <script is:inline>
+      (function () {
+        try {
+          var m = localStorage.getItem("color-mode") || "system";
+          var dark =
+            m === "dark" ||
+            (m === "system" &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches);
+          document.documentElement.classList.toggle("dark", dark);
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body class="font-sans bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-50">
     <Navbar client:idle locale={locale} currentPath={currentPath} />

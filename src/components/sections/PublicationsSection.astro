@@ -4,6 +4,10 @@ import publications from "../../data/publications.json";
 const { locale = "en" } = Astro.props;
 
 const featured = publications.slice(0, 4);
+
+// A DOI under the 10.1101 prefix is a bioRxiv/medRxiv preprint.
+const isPreprint = (p) => (p.doi || "").startsWith("10.1101");
+const preprintLabel = locale === "fr" ? "Prépublication" : "Preprint";
 ---
 <section
   id="publications"
@@ -23,8 +27,17 @@ const featured = publications.slice(0, 4);
         >
           <strong>{p.title}</strong>
         </a>
-        <p class="text-sm text-slate-600 dark:text-slate-400">
-          <em>{p.journal}</em>, {p.year}
+        <p class="text-sm text-slate-600 dark:text-slate-400 flex items-center gap-2">
+          {isPreprint(p) && (
+            <span class="inline-block text-[10px] font-bold uppercase tracking-wide text-amber-700 bg-amber-100 dark:text-amber-300 dark:bg-amber-900/40 px-1.5 py-0.5 rounded">
+              {preprintLabel}
+            </span>
+          )}
+          <span>
+            {p.journal && <em>{p.journal}</em>}
+            {p.journal && p.year ? ' · ' : ''}
+            {p.year}
+          </span>
         </p>
       </li>
     ))}

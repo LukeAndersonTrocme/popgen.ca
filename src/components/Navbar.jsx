@@ -109,9 +109,9 @@ export default function Navbar({ locale = "en", currentPath = "/" }) {
 				{/* Logo */}
 				<a href={r.home}>
 					<img
-						src="/assets/logo.jpg"
+						src="/assets/logo.png"
 						alt="PopGen Lab logo"
-						className="h-10 w-auto"
+						className="h-10 w-auto dark:invert"
 						width={120}
 						height={40}
 						loading="eager"
@@ -122,7 +122,10 @@ export default function Navbar({ locale = "en", currentPath = "/" }) {
 				<ul className="hidden md:flex space-x-6">
 					{menuItems.map((key) => (
 						<li key={key}>
-							<a href={r[key]} className="hover:text-cta">
+							<a
+								href={r[key]}
+								className="hover:text-primary hover:underline underline-offset-4 decoration-2 transition-colors"
+							>
 								{r[`${key}Label`]}
 							</a>
 						</li>
