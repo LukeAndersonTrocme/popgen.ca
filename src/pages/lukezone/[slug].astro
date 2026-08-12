@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import LukezoneLayout from '../../layouts/LukezoneLayout.astro';
+import LukezoneProfileCard from '../../components/LukezoneProfileCard.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('lukezone', ({ data }) => !data.draft);
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<LukezoneLayout
+  title={`${post.data.title} — ☆ LUKE ZONE ☆`}
+  description={post.data.description}
+  reading={true}
+>
+  <div class="lz-container">
+
+    <a href="/lukezone" class="lz-link">&larr; back to the zone</a>
+
+    <div class="lz-post-header">
+      <div class="lz-post-date">
+        {post.data.date.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })}
+      </div>
+      <h1 class="lz-post-title-lg">{post.data.title}</h1>
+      <p class="lz-post-desc">{post.data.description}</p>
+      {post.data.tags && post.data.tags.length > 0 && (
+        <div class="lz-post-tags">
+          {post.data.tags.map(tag => <span class="lz-tag">#{tag}</span>)}
+        </div>
+      )}
+    </div>
+
+    <div class="lz-prose">
+      <Content />
+    </div>
+
+    <LukezoneProfileCard />
+
+  </div>
+</LukezoneLayout>

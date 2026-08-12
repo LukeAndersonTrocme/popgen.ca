@@ -1,0 +1,123 @@
+---
+import { getCollection } from 'astro:content';
+import LukezoneLayout from '../../layouts/LukezoneLayout.astro';
+
+const allPosts = await getCollection('lukezone');
+const posts = allPosts
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const readingTime = (body: string) => Math.max(1, Math.round(body.trim().split(/\s+/).length / 200));
+
+// Group posts by month for archive sidebar
+const archive = new Map<string, typeof posts>();
+for (const post of posts) {
+  const key = post.data.date.toLocaleDateString('en-CA', { year: 'numeric', month: 'long' });
+  if (!archive.has(key)) archive.set(key, []);
+  archive.get(key)!.push(post);
+}
+---
+
+<LukezoneLayout
+  title="☆ LUKE ZONE ☆ — popgen.ca"
+  description="Welcome to the Luke Zone. Enter at your own risk."
+>
+  <div class="lz-page-layout">
+
+    <div class="lz-container">
+
+      <div class="lz-site-title"><span class="lz-star">☆ </span>LUKE ZONE<span class="lz-star"> ☆</span></div>
+      <div class="lz-subtitle">dispatches from the zone</div>
+
+      <div class="lz-badge-row">
+        <div class="lz-badge">VISITOR #<span class="lz-counter" id="lz-visitor-count">000000</span></div>
+        <div class="lz-badge">STATUS: <span class="lz-counter lz-blink">ONLINE</span></div>
+        <div class="lz-badge">HOSTED ON: EARTH</div>
+      </div>
+
+      <div class="lz-divider">DISPATCHES FROM THE ZONE</div>
+
+      <div class="lz-post-list">
+        {posts.length === 0 ? (
+          <p class="lz-empty">// no posts yet &mdash; transmission incoming</p>
+        ) : (
+          posts.map(post => (
+            <div class="lz-post-card">
+              <div class="lz-post-date">
+                {post.data.date.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })}
+                &nbsp;&middot;&nbsp;<span class="lz-read-time">~{readingTime(post.body)} min</span>
+              </div>
+              <div class="lz-post-title">
+                <a href={`/lukezone/${post.slug}`}>&gt;&gt; {post.data.title}</a>
+              </div>
+              <p class="lz-post-desc">{post.data.description}</p>
+              {post.data.tags && post.data.tags.length > 0 && (
+                <div class="lz-post-tags">
+                  {post.data.tags.map(tag => <span class="lz-tag">#{tag}</span>)}
+                </div>
+              )}
+            </div>
+          ))
+        )}
+      </div>
+
+      <div class="lz-footer">
+        <a href="/" class="lz-link">&larr; escape to popgen.ca</a>
+        <span>luke anderson-trocm&eacute; &bull; universit&eacute; de montr&eacute;al</span>
+      </div>
+
+    </div>
+
+    <aside class="lz-sidebar">
+
+      <div class="lz-sidebar-box">
+        <div class="lz-sidebar-heading">ARCHIVE</div>
+        <ul class="lz-archive-list">
+          {[...archive.entries()].map(([month, monthPosts]) => (
+            <li class="lz-archive-month">
+              <span class="lz-archive-month-name">{month}</span>
+              <ul>
+                {monthPosts.map(post => (
+                  <li><a href={`/lukezone/${post.slug}`}>{post.data.title}</a></li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="lz-sidebar-box">
+        <div class="lz-sidebar-heading">LINKS</div>
+        <ul class="lz-sidebar-links">
+          <li><a href="/">popgen.ca</a></li>
+          <li><a href="https://github.com/LukeAndersonTrocme" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://scholar.google.com/citations?user=xXgMOiEAAAAJ" target="_blank" rel="noopener">Google Scholar</a></li>
+        </ul>
+      </div>
+
+      <div class="lz-sidebar-box lz-sidebar-mini">
+        <div class="lz-sidebar-heading">SITE STATS</div>
+        <div>Posts: {posts.length}</div>
+        <div>Established: 2025</div>
+        <div>Made with: caffeine</div>
+      </div>
+
+    </aside>
+
+  </div>
+</LukezoneLayout>
+
+<script is:inline>
+  (function () {
+    var el = document.getElementById('lz-visitor-count');
+    if (!el) return;
+    var target = 1337, steps = 45, duration = 1800;
+    var step = 0;
+    var timer = setInterval(function () {
+      step++;
+      var val = Math.round(target * (step / steps));
+      el.textContent = String(Math.min(val, target)).padStart(6, '0');
+      if (step >= steps) clearInterval(timer);
+    }, duration / steps);
+  })();
+</script>

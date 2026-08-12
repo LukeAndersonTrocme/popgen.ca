@@ -1,0 +1,47 @@
+---
+import LukezoneThemeSwitcher from '../components/LukezoneThemeSwitcher.jsx';
+import LukezoneEffects from '../components/LukezoneEffects.jsx';
+import LukezoneAds from '../components/LukezoneAds.jsx';
+import '../styles/lukezone.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  noindex?: boolean;
+  reading?: boolean;
+}
+
+const { title, description = '', noindex = false, reading = false } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" data-theme="chaos">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  {description && <meta name="description" content={description} />}
+  {noindex && <meta name="robots" content="noindex" />}
+  <link rel="icon" type="image/png" href="/assets/logo.png" />
+  <!-- Anti-FOUC: apply saved theme before first paint -->
+  <script is:inline>
+    (function () {
+      var t = localStorage.getItem('lukezone-theme') || 'chaos';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+<body>
+  <div class="lz-marquee-wrap" aria-hidden="true">
+    <span class="lz-marquee-track">
+      ★ WELCOME TO THE LUKE ZONE ★ YOU ARE NOT LOST ★ ENTER AT YOUR OWN RISK ★ EST. 2025 ★ &nbsp;&nbsp;&nbsp;
+    </span>
+  </div>
+
+  <slot />
+
+  <LukezoneThemeSwitcher client:load />
+  <LukezoneEffects client:load reading={reading} />
+  <LukezoneAds client:load />
+</body>
+</html>
