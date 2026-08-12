@@ -8,11 +8,11 @@ draft: false
 
 ## Fourteen agents from my phone
 
-I can run fourteen AI agents from my phone. I do it most mornings — lying in bed, half awake, checking which agents need attention before I've made coffee. They're patiently waiting for me. Some of them have reports they've written. Others are hanging on a simple prompt: "permission to find <insert grep I can barely comprehend> in pages 257-282 in some textbook" uh, yeah sure go for it. [press 1].
+I can run fourteen AI agents from my phone. I do it most mornings — lying in bed, half awake, checking which agents need attention before I've made coffee. They're patiently waiting for me. Some of them have reports they've written. Others are hanging on a simple prompt: "permission to find `<insert grep I can barely comprehend>` in pages 257-282 in some textbook" uh, yeah sure go for it. [press 1].
 
 Okay fine, to be honest the phone _works_ but it's nowhere near the _best_ interface. but it works. herdr has a touch interface that lets you swipe between workspaces and tap to unblock agents. But it's a small screen.
 
-Instead I might open my small travel laptop — the one that lives at home — and SSH into my office Mac at the university <ssh work>. Tailscale makes it reachable from anywhere. I open Ghostty, and there they are: nine named workspaces, each with one to three Claude Code agents in various states. Some are idle, waiting where I left them last night. Some are blocked, needing a decision from me.
+Instead I might open my small travel laptop — the one that lives at home — and SSH into my office Mac at the university `<ssh work>`. Tailscale makes it reachable from anywhere. I open Ghostty, and there they are: nine named workspaces, each with one to three Claude Code agents in various states. Some are idle, waiting where I left them last night. Some are blocked, needing a decision from me.
 
 I scan the statuses. I launch a couple of new agents on tasks. "Can you please remind me where the resolution parameter sweep file is?" "Actually for this lecture I think we should rethink the order of topics on slide 20 to 25. The historical background feels a little out of place and might be better to go after a brief intro about mutation rates". With the agents churning, I bike to the office. By the time I sit down at my desk, I have a new swarm of questions to answer, permissions to grant, and reports to read.
 
