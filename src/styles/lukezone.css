@@ -49,8 +49,8 @@
   --lz-accent-3:      #006600;
   --lz-accent-4:      #9900cc;
 
-  --lz-font-body:    'Comic Sans MS', 'Comic Sans', cursive;
-  --lz-font-heading: 'Comic Sans MS', 'Comic Sans', cursive;
+  --lz-font-body:    'Comic Sans MS', 'Comic Sans', 'Chalkboard SE', sans-serif;
+  --lz-font-heading: 'Comic Sans MS', 'Comic Sans', 'Chalkboard SE', sans-serif;
 
   --lz-glow-fg:      none;
   --lz-glow-1:       none;
@@ -187,6 +187,7 @@ body::after {
   flex: 1;
   min-width: 0;
   padding: 2.5rem 1.5rem 5rem;
+  margin: 0 auto;
 }
 
 /* ============================================================
@@ -934,6 +935,7 @@ body::after {
 [data-theme="boring"] .lz-star { display: none; }
 [data-theme="boring"] .lz-marquee-wrap { display: none; }
 [data-theme="boring"] .lz-subtitle { font-style: italic; }
+[data-theme="boring"] .lz-divider { display: none; }
 
 /* ============================================================
    BOOT SEQUENCE OVERLAY
