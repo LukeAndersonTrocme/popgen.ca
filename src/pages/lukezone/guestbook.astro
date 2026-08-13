@@ -1,0 +1,24 @@
+---
+import LukezoneLayout from '../../layouts/LukezoneLayout.astro';
+import LukezoneGuestbook from '../../components/LukezoneGuestbook.jsx';
+---
+
+<LukezoneLayout
+  title="GUESTBOOK — ☆ LUKE ZONE ☆"
+  description="Sign the guestbook. Leave your mark on the Luke Zone."
+>
+  <div class="lz-container">
+
+    <a href="/lukezone" class="lz-link">&larr; back to the zone</a>
+
+    <div class="lz-post-header">
+      <h1 class="lz-post-title-lg">GUESTBOOK</h1>
+      <p class="lz-post-desc">Sign in. Say hi. Leave your mark. Requires a GitHub account.</p>
+    </div>
+
+    <div class="lz-prose">
+      <LukezoneGuestbook client:load />
+    </div>
+
+  </div>
+</LukezoneLayout>

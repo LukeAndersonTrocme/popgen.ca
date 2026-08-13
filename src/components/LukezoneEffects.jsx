@@ -67,7 +67,6 @@ export default function LukezoneEffects({ reading = false }) {
       if (i >= BOOT_LINES.length) {
         clearInterval(interval);
         setBootDone(true);
-        setTimeout(exitBoot, 1200);
       }
     }, 280);
 

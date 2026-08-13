@@ -7,11 +7,11 @@ const THEMES = [
 ];
 
 export default function LukezoneThemeSwitcher() {
-  const [current, setCurrent] = useState('chaos');
+  const [current, setCurrent] = useState('boring');
 
   useEffect(() => {
     // Read from DOM — already set by the anti-FOUC inline script
-    const active = document.documentElement.getAttribute('data-theme') || 'chaos';
+    const active = document.documentElement.getAttribute('data-theme') || 'boring';
     setCurrent(active);
   }, []);
 

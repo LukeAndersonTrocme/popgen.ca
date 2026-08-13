@@ -45,6 +45,8 @@ Oh yeah obligatory shout out to my brother Mark who put me onto most of these to
 
 **No images.** The terminal can't handle pasting images, and Claude Code in the terminal can't read PDFs the way the VS Code extension can. For tasks that involve screenshots, diagrams, or document review, I still drop into VS Code with the Claude Code plugin. It doesn't feel like a burden — it's a targeted tool for specific jobs — but it means this isn't a *complete* replacement for the IDE workflow.
 
+**Correction:** Ghostty supports the Kitty graphics protocol, which allows terminal applications to render images directly in the terminal. I stand corrected. (Thanks, Mark.)
+
 **Conversation sprawl.** It is dangerously easy to spin up new agents. "I'll just start a quick conversation for this one thing" — and suddenly you have eighteen agents and you've lost track of what half of them are doing. The system requires discipline. Close conversations when they're done. Write the checkpoint. Don't let idle agents accumulate like browser tabs.
 
 **Terminal text editing.** When you're composing a long prompt in the terminal, you're not in a text editor. You're holding Option-Left to jump between words and hoping you don't accidentally submit halfway through a sentence. It's manageable.
