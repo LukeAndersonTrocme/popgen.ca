@@ -23,11 +23,15 @@ const { title, description = '', noindex = false, reading = false } = Astro.prop
   {description && <meta name="description" content={description} />}
   {noindex && <meta name="robots" content="noindex" />}
   <link rel="icon" type="image/png" href="/assets/logo.png" />
-  <!-- Anti-FOUC: apply saved theme before first paint -->
+  <!-- Anti-FOUC: apply saved theme + mirror before first paint -->
   <script is:inline>
     (function () {
       var t = localStorage.getItem('lukezone-theme') || 'boring';
+      if (t === 'void') t = 'boring';
       document.documentElement.setAttribute('data-theme', t);
+      if (localStorage.getItem('lukezone-mirror') === '1') {
+        document.documentElement.setAttribute('data-mirror', '');
+      }
     })();
   </script>
 </head>
@@ -40,8 +44,8 @@ const { title, description = '', noindex = false, reading = false } = Astro.prop
 
   <slot />
 
-  <LukezoneThemeSwitcher client:load />
-  <LukezoneEffects client:load reading={reading} />
-  <LukezoneAds client:load />
+  <LukezoneThemeSwitcher client:only="react" />
+  <LukezoneEffects client:only="react" reading={reading} />
+  <LukezoneAds client:only="react" />
 </body>
 </html>

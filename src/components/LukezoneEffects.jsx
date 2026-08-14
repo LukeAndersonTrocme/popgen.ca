@@ -1,16 +1,26 @@
 import { useEffect, useRef, useState } from 'react';
 
-const BANNER_THEMES = new Set(['chaos']);
-const CRT_THEMES    = new Set(['neon']);
-const SPARKLE_THEMES = new Set(['chaos']);
+const BANNER_THEMES  = new Set(['gore', 'chaos']);
+const CRT_THEMES     = new Set(['terminal', 'neon']);
+const SPARKLE_THEMES = new Set(['vaporwave', 'gore', 'chaos', 'insane']);
+const BOOT_SKIP_THEMES = new Set(['boring', 'void']);
 
 const SPARKLE_CHARS = ['★', '✦', '✧', '✶', '✸', '✺', '◆', '◇', '✼', '❋'];
 
 const SPARKLE_COLORS = {
+  vaporwave: ['#ff71ce', '#01cdfe', '#b967ff', '#05ffa1', '#ff71ce'],
+  gore: ['#e0e000', '#00ffff', '#ff00ff', '#ff4444'],
   chaos: ['#ff0000', '#00ff00', '#0000ff', '#ff00ff', '#ffff00', '#00ffff', '#ff6600', '#ff0099'],
+  insane: ['#6b0000', '#8b0000', '#8b6914', '#4a2800'],
 };
 
 const BANNERS = {
+  gore: [
+    '🚧 UNDER CONSTRUCTION — PLEASE RETURN IN 1999 🚧',
+    '⚠️ THIS PAGE OPTIMIZED FOR INTERNET EXPLORER 4.0 ⚠️',
+    '📧 SIGN MY GUESTBOOK!! (AOL USERS ONLY) 📧',
+    '🔥 YOU HAVE BEEN ADDED TO MY WEBRING 🔥',
+  ],
   chaos: [
     '🎉 YOU ARE THE 1,000,000th VISITOR!! CLICK HERE TO CLAIM YOUR PRIZE!! 🎉',
     '⚠️ YOUR COMPUTER DOES NOT HAVE A VIRUS — CALL 1-800-LUKE-ZONE IMMEDIATELY ⚠️',
@@ -20,6 +30,7 @@ const BANNERS = {
 };
 
 const BANNER_STYLES = {
+  gore: { background: '#0a0a2e', color: '#e0e000', borderTop: '4px double #e0e000', borderBottom: '4px double #e0e000' },
   chaos: { background: '#00cc00', color: '#ff0000', borderTop: '4px solid #000', borderBottom: '4px solid #000' },
 };
 
@@ -55,9 +66,9 @@ export default function LukezoneEffects({ reading = false }) {
   useEffect(() => {
     try {
       if (sessionStorage.getItem('lz-booted')) { setBootGone(true); return; }
-      // Skip boot on boring theme
+      // Skip boot on boring/void themes
       const t = localStorage.getItem('lukezone-theme');
-      if (t === 'boring') { setBootGone(true); return; }
+      if (BOOT_SKIP_THEMES.has(t)) { setBootGone(true); return; }
     } catch (_) { setBootGone(true); return; }
 
     let i = 0;
