@@ -1,0 +1,138 @@
+<!DOCTYPE html><html lang="en" data-theme="boring"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>How to Organise Your Scripts and Files — ☆ LUKE ZONE ☆</title><meta name="description" content="Four questions your project folder has to answer — raw data, derived outputs, six-month recall, portability — each with a rule and a test you can actually run. Handout from a Digital Wednesdays session."><link rel="icon" type="image/png" href="/assets/logo.png"><!-- Anti-FOUC: apply saved theme + mirror before first paint --><script>
+    (function () {
+      var t = localStorage.getItem('lukezone-theme') || 'boring';
+      if (t === 'void') t = 'boring';
+      document.documentElement.setAttribute('data-theme', t);
+      if (localStorage.getItem('lukezone-mirror') === '1') {
+        document.documentElement.setAttribute('data-mirror', '');
+      }
+    })();
+  </script><link rel="stylesheet" href="/_astro/brian.D8oUn3eb.css">
+<link rel="stylesheet" href="/_astro/_slug_.DAdsItAf.css"></head> <body> <div class="lz-marquee-wrap" aria-hidden="true"> <span class="lz-marquee-track">
+★ WELCOME TO THE LUKE ZONE ★ YOU ARE NOT LOST ★ ENTER AT YOUR OWN RISK ★ EST. 2025 ★ &nbsp;&nbsp;&nbsp;
+</span> </div>  <div class="lz-container"> <a href="/lukezone" class="lz-link">&larr; back to the zone</a> <div class="lz-post-header"> <div class="lz-post-date"> October 14, 2026 </div> <h1 class="lz-post-title-lg">How to Organise Your Scripts and Files</h1> <p class="lz-post-desc">Four questions your project folder has to answer — raw data, derived outputs, six-month recall, portability — each with a rule and a test you can actually run. Handout from a Digital Wednesdays session.</p> <div class="lz-post-tags"> <span class="lz-tag">#reproducibility</span><span class="lz-tag">#project-organisation</span><span class="lz-tag">#R</span><span class="lz-tag">#RStudio</span><span class="lz-tag">#digital-wednesdays</span> </div> </div> <div class="lz-prose"> <p><em>Version française : <a href="/lukezone/organisation-scripts-fichiers">Organisation des scripts et des fichiers/dossiers</a></em></p>
+<h2 id="do-you-recognise-your-own-folder">Do you recognise your own folder?</h2>
+<ul>
+<li><code>analysis_final_v3_REALLY_final.R</code></li>
+<li><code>data_clean.csv</code>, <code>data_clean2.csv</code>, <code>data_clean_new.csv</code> — and nobody knows which one was used</li>
+<li><code>setwd("/Users/me/Desktop/stuff/")</code> at the top of every script</li>
+<li>a 1200-line script that reads, cleans, analyses and plots</li>
+<li>figure 2 of the manuscript, which nobody can regenerate any more</li>
+</ul>
+<p>None of these is a discipline problem. They are four questions your project folder doesn’t answer. Settle the four questions and the symptoms disappear on their own.</p>
+<hr>
+<h2 id="1-where-is-my-raw-data">1. Where is my raw data?</h2>
+<p><strong>Why it hurts.</strong> If the same folder holds what you were given and what your code produced, you can no longer tell the source from the consequence. One misdirected <code>write.csv()</code> and irreplaceable data is gone — usually without you noticing for weeks.</p>
+<p><strong>The rule.</strong> <code>data/raw/</code> is sacred. No script ever writes to it. Everything the code produces goes somewhere else. And a small <code>data/raw/README.md</code> records the provenance: where it came from, when you received it, which version, who to contact.</p>
+<pre class="language-bash" data-language="bash"><code is:raw="" class="language-bash"><span class="token function">chmod</span> <span class="token parameter variable">-R</span> <span class="token number">444</span> data/raw/     <span class="token comment"># the system now refuses to write</span>
+</code></pre>
+<p>It takes two seconds and it turns a silent catastrophe into an error message.</p>
+<p><strong>The test.</strong> Could a bug in my code damage my raw data? If the answer isn’t an immediate <em>no</em>, you have work to do.</p>
+<hr>
+<h2 id="2-what-is-derived">2. What is derived?</h2>
+<p><strong>Why it hurts.</strong> Once you can’t tell which files are inputs and which are outputs, you stop daring to delete anything. The folder grows, every file becomes potentially precious, and you keep it all out of fear.</p>
+<p><strong>The rule.</strong> Everything your code produces is disposable, because you can regenerate it. Intermediate data in <code>data/processed/</code>, figures and tables in <code>output/</code>. And scripts are numbered in the order you run them:</p>
+<pre class="language-plaintext" data-language="plaintext"><code is:raw="" class="language-plaintext">scripts/01_cleaning.R
+scripts/02_analysis.R
+scripts/03_figures.R
+</code></pre>
+<p>The number isn’t cosmetic: it is the pipeline’s documentation. Someone opening the folder knows where to start.</p>
+<p><strong>The test.</strong> <code>rm -rf output/</code>, then re-run everything. Does it come back? If a file doesn’t come back, it’s an orphan — either it is actually raw data (move it into <code>data/raw/</code>), or the recipe that produced it no longer exists. Both are worth discovering now rather than at reviewer 2.</p>
+<hr>
+<h2 id="3-what-if-i-come-back-in-six-months">3. What if I come back in six months?</h2>
+<p><strong>Why it hurts.</strong> Future you has none of present you’s memories. Future you remembers exactly as much as a colleague you’d email the folder to: nothing.</p>
+<p><strong>The rule.</strong> A <code>README.md</code> at the root that answers three things in ten lines or less: <em>what is this project</em>, <em>how do you run it</em>, <em>where is the data</em>. Best return on investment on this entire list.</p>
+<p>And naming that leaves you alone:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Do</th><th>Avoid</th></tr></thead><tbody><tr><td><code>2026-10-14_notes.md</code> (ISO dates — they sort)</td><td><code>14oct26.md</code>, <code>oct14.md</code></td></tr><tr><td><code>01_cleaning.R</code> (two-digit numbers)</td><td><code>1_cleaning.R</code> sitting next to <code>10_figures.R</code></td></tr><tr><td><code>cartagene_data.csv</code></td><td><code>données cartagène (copy).csv</code></td></tr><tr><td>lowercase, <code>_</code> or <code>-</code>, never both at random</td><td><code>My Files/Final Analysis/</code></td></tr><tr><td><code>analysis.R</code> versioned in Git</td><td><code>analysis_v3_final_REALLY.R</code></td></tr></tbody></table>
+<p>No spaces, no accents, no decorative capitals. This isn’t purism: spaces break shell scripts, accents break transfers between your Mac and the cluster, and <code>final</code> is a lie you keep telling yourself.</p>
+<p><strong>The test.</strong> Open the folder and say within five seconds what to run first. If you have to think, write the README.</p>
+<hr>
+<h2 id="4-what-has-to-travel-with-the-project">4. What has to travel with the project?</h2>
+<p><strong>Why it hurts.</strong> A project that only works on your machine isn’t a project, it’s a configuration. It survives neither sharing, nor the cluster, nor a new computer.</p>
+<p><strong>The rule.</strong> Relative paths, always. In R the mechanism is the RStudio Project (<code>.Rproj</code>) combined with <code>here</code>:</p>
+<pre class="language-r" data-language="r"><code is:raw="" class="language-r">library<span class="token punctuation">(</span>here<span class="token punctuation">)</span>
+data <span class="token operator">&#x3C;-</span> read_csv<span class="token punctuation">(</span>here<span class="token punctuation">(</span><span class="token string">"data"</span><span class="token punctuation">,</span> <span class="token string">"raw"</span><span class="token punctuation">,</span> <span class="token string">"cartagene.csv"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+ggsave<span class="token punctuation">(</span>here<span class="token punctuation">(</span><span class="token string">"output"</span><span class="token punctuation">,</span> <span class="token string">"figures"</span><span class="token punctuation">,</span> <span class="token string">"fig2.pdf"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<p><code>here()</code> finds the project root by itself, no matter where the script is launched from. In Python, <code>pathlib</code> plays the same role. In both cases, <code>setwd()</code> and <code>os.chdir()</code> are a sign that something else should be fixed.</p>
+<p>Capture the environment too: <code>renv::snapshot()</code> in R, <code>requirements.txt</code> or an <code>environment.yml</code> in Python. Code without its package versions ages badly.</p>
+<p><strong>The test.</strong> Send the folder to a colleague, or clone it on the cluster. Does it run without editing a single line?</p>
+<hr>
+<h2 id="the-skeleton">The skeleton</h2>
+<p>The four answers, assembled. Nothing exotic — this is roughly the community consensus of the last fifteen years.</p>
+<pre class="language-plaintext" data-language="plaintext"><code is:raw="" class="language-plaintext">my-project/
+├── README.md              # what it is, how to run it, where the data is
+├── my-project.Rproj       # the root, for here() and RStudio
+├── data/
+│   ├── raw/               # sacred, read-only, never written by a script
+│   │   └── README.md      # provenance: source, date, version
+│   └── processed/         # generated, therefore disposable
+├── R/                     # (src/ in Python) reusable functions
+├── scripts/               # the pipeline, numbered
+│   ├── 01_cleaning.R
+│   ├── 02_analysis.R
+│   └── 03_figures.R
+├── output/
+│   ├── figures/
+│   └── tables/
+├── doc/                   # manuscript, notes, presentations
+└── .gitignore             # data/processed/, output/, .Rhistory
+</code></pre>
+<p>Two details that matter more than they look. First, the <code>R/</code> versus <code>scripts/</code> split: the <em>functions</em> on one side, the <em>recipes that call them</em> on the other. That’s what prevents the 1200-line script. Second, <code>output/</code> is in <code>.gitignore</code> — you don’t version what you can regenerate.</p>
+<hr>
+<h2 id="when-it-gets-serious">When it gets serious</h2>
+<p>Three tiers, for the day the skeleton stops being enough.</p>
+<p><strong>Re-running by hand becomes painful.</strong> When you hesitate to re-run <code>01_</code> because it takes forty minutes and you’re no longer sure what changed, you need a build system: <code>targets</code> in R, <code>Snakemake</code> or <code>Nextflow</code> in Python/shell. They track what is up to date and only recompute what’s necessary.</p>
+<p><strong>Your machine’s paths stop meaning anything.</strong> On the cluster, scratch space is fast but periodically wiped; project space is durable but slow and quota’d. Raw data lives in the durable space, computation happens in scratch. That split is exactly question 1, imposed by the infrastructure.</p>
+<p><strong>You want a real version history.</strong> That’s Git — and it’s the subject of a session in two weeks, so we won’t dig today. Just remember this: you don’t version with filenames. <code>_v2</code>, <code>_final</code>, <code>_revised_LAT</code> are symptoms, not solutions.</p>
+<hr>
+<h2 id="food-for-thought">Food for thought</h2>
+<p><strong>To try this week</strong> (each one takes under ten minutes):</p>
+<ol>
+<li><code>chmod -R 444 data/raw/</code> on your active project.</li>
+<li>The <code>rm -rf output/</code> test — re-run everything, see what doesn’t come back.</li>
+<li>Write the ten-line README. Just the three questions.</li>
+<li>Replace one <code>setwd()</code> with <code>here()</code>.</li>
+<li>Open a project from a year ago and note, without fixing anything, the three things you no longer understand.</li>
+</ol>
+<p><strong>For discussion:</strong></p>
+<ul>
+<li>How long before you stop understanding your own code? Two weeks? Six months?</li>
+<li>Is there a folder you don’t dare clean up? What exactly is holding you back?</li>
+<li>What happens when two people work on the same project — how are you handling it right now?</li>
+<li>Which file are you most afraid of losing, and what is protecting it at the moment?</li>
+</ul>
+<hr>
+<p><em>Reference: Noble WS (2009), “A Quick Guide to Organizing Computational Biology Projects”, PLoS Computational Biology 5(7).</em></p> </div> <div class="lz-profile-card"> <div class="lz-profile-img-wrap"> <div class="lz-profile-img-placeholder" aria-label="Profile photo placeholder">?</div> </div> <div class="lz-profile-info"> <div class="lz-profile-name">Luke Anderson-Trocm&eacute;</div> <p class="lz-profile-bio">
+Luke is a real mr. professor man of population genetics
+      at Universit&eacute; de Montr&eacute;al and this is his webstie. Please <a href="/lukezone/guestbook" class="lz-link">sign the guestbook</a>.
+</p> <div class="lz-profile-meta"> <span>Member since 2025</span> <a href="/lukezone" class="lz-link">&larr; back to the zone</a> </div> </div> </div> </div>  <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).only=e;window.dispatchEvent(new Event("astro:only"));})();;(()=>{var A=Object.defineProperty;var g=(i,o,a)=>o in i?A(i,o,{enumerable:!0,configurable:!0,writable:!0,value:a}):i[o]=a;var d=(i,o,a)=>g(i,typeof o!="symbol"?o+"":o,a);{let i={0:t=>m(t),1:t=>a(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(a(t)),5:t=>new Set(a(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>1/0*t},o=t=>{let[l,e]=t;return l in i?i[l](e):void 0},a=t=>t.map(o),m=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([l,e])=>[l,o(e)]));class y extends HTMLElement{constructor(){super(...arguments);d(this,"Component");d(this,"hydrator");d(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let c=this.querySelectorAll("astro-slot"),n={},h=this.querySelectorAll("template[data-astro-template]");for(let r of h){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of c){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("name")||"default"]=r.innerHTML)}let p;try{p=this.hasAttribute("props")?m(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(s+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}let u;await this.hydrator(this)(this.Component,p,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});d(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),c.disconnect(),this.childrenConnectedCallback()},c=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});c.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}async start(){let e=JSON.parse(this.getAttribute("opts")),c=this.getAttribute("client");if(Astro[c]===void 0){window.addEventListener(`astro:${c}`,()=>this.start(),{once:!0});return}try{await Astro[c](async()=>{let n=this.getAttribute("renderer-url"),[h,{default:p}]=await Promise.all([import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),u=this.getAttribute("component-export")||"default";if(!u.includes("."))this.Component=h[u];else{this.Component=h;for(let f of u.split("."))this.Component=this.Component[f]}return this.hydrator=p,this.hydrate},e,this)}catch(n){console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`,n)}}attributeChangedCallback(){this.hydrate()}}d(y,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",y)}})();</script><astro-island uid="2r2Crs" component-url="/_astro/LukezoneThemeSwitcher.DULuYkR3.js" component-export="default" renderer-url="/_astro/client.CEcN8nfy.js" props="{}" ssr client="only" opts="{&quot;name&quot;:&quot;LukezoneThemeSwitcher&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> <astro-island uid="Z5BOD7" component-url="/_astro/LukezoneEffects.DjjXTgF1.js" component-export="default" renderer-url="/_astro/client.CEcN8nfy.js" props="{&quot;reading&quot;:[0,true]}" ssr client="only" opts="{&quot;name&quot;:&quot;LukezoneEffects&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> <astro-island uid="2j3lIB" component-url="/_astro/LukezoneAds.DqMPWN2k.js" component-export="default" renderer-url="/_astro/client.CEcN8nfy.js" props="{}" ssr client="only" opts="{&quot;name&quot;:&quot;LukezoneAds&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> </body></html>
