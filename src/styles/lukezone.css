@@ -795,6 +795,29 @@ body::after {
   margin: 2rem 0;
 }
 
+.lz-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.25rem;
+  font-size: 0.9em;
+  display: block;
+  overflow-x: auto;
+}
+
+.lz-prose th,
+.lz-prose td {
+  border: 1px solid var(--lz-border);
+  padding: 0.5rem 0.65rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.lz-prose th {
+  font-family: var(--lz-font-heading);
+  color: var(--lz-accent-1);
+  background: rgba(0, 0, 0, 0.25);
+}
+
 /* ============================================================
    PROFILE CARD (post footer)
    ============================================================ */
