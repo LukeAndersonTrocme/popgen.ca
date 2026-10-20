@@ -4,7 +4,7 @@ import enData from "../../content/en/index.json";
 import frData from "../../content/fr/index.json";
 const { locale = "en" } = Astro.props;
 const data = locale === "fr" ? frData : enData;
-const { team } = data;
+const { team, labPhoto } = data;
 ---
 <section
   id="people"
@@ -13,7 +13,20 @@ const { team } = data;
   <h2 class="text-4xl font-bold">
     {locale === 'fr' ? 'Équipe' : 'Meet the Team'}
   </h2>
-  <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto px-4">
+  {labPhoto && (
+    <figure class="mt-8 max-w-4xl mx-auto px-4">
+      <img
+        src={labPhoto.src}
+        alt={labPhoto.alt}
+        class="w-full rounded-xl shadow-lg"
+        loading="lazy"
+      />
+      <figcaption class="mt-3 text-sm text-slate-500 dark:text-slate-400">
+        {labPhoto.caption}
+      </figcaption>
+    </figure>
+  )}
+  <div class="mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto px-4">
     {team.map((m) => {
       const href = m.slug
         ? `/${locale === 'fr' ? 'fr/' : ''}${m.slug}`

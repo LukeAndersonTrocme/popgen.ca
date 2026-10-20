@@ -29,6 +29,11 @@
       }
     ]
   },
+  "labPhoto": {
+    "src": "/assets/lab-photo.jpg",
+    "alt": "L'équipe du laboratoire PopGen",
+    "caption": "Le labo, octobre 2026."
+  },
   "team": [
     {
       "name": "Luke Anderson-Trocmé",
@@ -36,6 +41,18 @@
       "img": "/assets/team/luke_crop.jpg",
       "slug": "luke",
       "bio": ""
+    },
+    {
+      "name": "Lylia Dehas",
+      "role": "Étudiante à la maîtrise, UQAM",
+      "img": "/assets/team/you.jpg",
+      "bio": "Codirigée par Hakim Lounis. Formée en informatique, elle construit des simulations d'arbres généalogiques pour étudier comment la migration et le choix du partenaire façonnent la diversité génétique des populations fondatrices comme celle du Québec."
+    },
+    {
+      "name": "Chloé Matta",
+      "role": "Étudiante au doctorat, Université de Montréal",
+      "img": "/assets/team/you.jpg",
+      "bio": "Doctorante en bio-informatique avec une formation en microbiologie, elle conçoit des visualisations interactives qui rendent les données de génétique des populations lisibles — autant pour les chercheurs cliniques que pour toute personne curieuse de ses origines."
     },
     {
       "name": "Brian",
@@ -52,6 +69,17 @@
     }
   ],
   "news": [
+    {
+      "date": "octobre 2026",
+      "headline": "ASHG 2026 à Montréal",
+      "desc": "Nos deux étudiantes présentent des affiches au congrès annuel de l'ASHG. Chloé Matta — tableau 4010T. Lylia Dehas — tableau 7039W. Venez nous saluer !"
+    },
+    {
+      "date": "octobre 2026",
+      "headline": "Le labo a son autocollant",
+      "desc": "Notre premier autocollant de labo est enfin là. Venez en chercher un à l'ASHG.",
+      "img": "/assets/sticker.png"
+    },
     {
       "date": "janvier 2026",
       "headline": "Nouvel article dans Genetics",

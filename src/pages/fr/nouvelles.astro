@@ -8,10 +8,15 @@ const { news } = data;
     <h1 class="text-4xl font-bold">Nouvelles</h1>
     <div class="mt-8 space-y-8">
       {news.map((n) => (
-        <article class="border-l-4 border-primary pl-6">
-          <h2 class="text-xl font-semibold">{n.headline}</h2>
-          <time class="text-sm text-slate-500 dark:text-slate-400">{n.date}</time>
-          <p class="mt-2 text-slate-700 dark:text-slate-300">{n.desc}</p>
+        <article class="border-l-4 border-primary pl-6 flex gap-6 items-start">
+          <div class="flex-1">
+            <h2 class="text-xl font-semibold">{n.headline}</h2>
+            <time class="text-sm text-slate-500 dark:text-slate-400">{n.date}</time>
+            <p class="mt-2 text-slate-700 dark:text-slate-300">{n.desc}</p>
+          </div>
+          {n.img && (
+            <img src={n.img} alt="" class="w-28 h-28 object-contain shrink-0" loading="lazy" />
+          )}
         </article>
       ))}
     </div>

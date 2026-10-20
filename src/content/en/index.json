@@ -29,6 +29,11 @@
       }
     ]
   },
+  "labPhoto": {
+    "src": "/assets/lab-photo.jpg",
+    "alt": "The PopGen Lab team",
+    "caption": "The lab, October 2026."
+  },
   "team": [
     {
       "name": "Luke Anderson-Trocmé",
@@ -36,6 +41,18 @@
       "img": "/assets/team/luke_crop.jpg",
       "slug": "luke",
       "bio": ""
+    },
+    {
+      "name": "Lylia Dehas",
+      "role": "MSc student, UQAM",
+      "img": "/assets/team/you.jpg",
+      "bio": "Co-supervised with Hakim Lounis. Trained in computer science, she builds simulations of family trees to study how migration and mate choice shape genetic diversity in founder populations like Quebec."
+    },
+    {
+      "name": "Chloé Matta",
+      "role": "PhD student, Université de Montréal",
+      "img": "/assets/team/you.jpg",
+      "bio": "A doctoral student in bioinformatics with a background in microbiology, she designs interactive visualizations that make population genetic data legible — both for clinical researchers and for anyone curious about their own ancestry."
     },
     {
       "name": "Brian",
@@ -52,6 +69,17 @@
     }
   ],
   "news": [
+    {
+      "date": "October 2026",
+      "headline": "ASHG 2026 in Montreal",
+      "desc": "Both lab students are presenting posters at the ASHG Annual Meeting. Chloé Matta — board 4010T. Lylia Dehas — board 7039W. Come say hi."
+    },
+    {
+      "date": "October 2026",
+      "headline": "The lab has a sticker",
+      "desc": "Our first lab sticker is out in the world. Find us at ASHG to grab one.",
+      "img": "/assets/sticker.png"
+    },
     {
       "date": "January 2026",
       "headline": "New paper in Genetics",

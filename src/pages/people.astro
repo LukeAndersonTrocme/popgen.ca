@@ -2,10 +2,23 @@
 import Page from "../layouts/Page.astro";
 import { Card, CardContent } from "../components/ui/card.jsx";
 import data from "../content/en/index.json";
-const { team } = data;
+const { team, labPhoto } = data;
 ---
 <Page title="People – PopGen Lab" lang="en" locale="en" description="Meet the PopGen Lab team at Université de Montréal.">
   <section class="py-12">
+    {labPhoto && (
+      <figure class="mb-16">
+        <img
+          src={labPhoto.src}
+          alt={labPhoto.alt}
+          class="w-full rounded-xl shadow-lg"
+          loading="lazy"
+        />
+        <figcaption class="mt-3 text-sm text-slate-500 dark:text-slate-400">
+          {labPhoto.caption}
+        </figcaption>
+      </figure>
+    )}
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       {team.map((m) => {
         const href = m.slug ? `/${m.slug}` : null;
