@@ -1,0 +1,179 @@
+<!DOCTYPE html><html lang="en" data-theme="boring"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Git et GitHub, pour de vrai — ☆ LUKE ZONE ☆</title><meta name="description" content="Le modèle mental de Git en trois boîtes, quatre questions auxquelles il répond — revenir en arrière, ne rien perdre, essayer sans casser, travailler à plusieurs — l'astuce « une phrase par ligne » pour les manuscrits, et tout ce que Git fait d'autre. Aide-mémoire d'une session Digital Wednesdays."><link rel="icon" type="image/png" href="/assets/logo.png"><!-- Anti-FOUC: apply saved theme + mirror before first paint --><script>
+    (function () {
+      var t = localStorage.getItem('lukezone-theme') || 'boring';
+      if (t === 'void') t = 'boring';
+      document.documentElement.setAttribute('data-theme', t);
+      if (localStorage.getItem('lukezone-mirror') === '1') {
+        document.documentElement.setAttribute('data-mirror', '');
+      }
+    })();
+  </script><link rel="stylesheet" href="/_astro/brian.C8sJ4KkE.css">
+<link rel="stylesheet" href="/_astro/_slug_.DAdsItAf.css"></head> <body> <div class="lz-marquee-wrap" aria-hidden="true"> <span class="lz-marquee-track">
+★ WELCOME TO THE LUKE ZONE ★ YOU ARE NOT LOST ★ ENTER AT YOUR OWN RISK ★ EST. 2025 ★ &nbsp;&nbsp;&nbsp;
+</span> </div>  <div class="lz-container"> <a href="/lukezone" class="lz-link">&larr; back to the zone</a> <div class="lz-post-header"> <div class="lz-post-date"> November 11, 2026 </div> <h1 class="lz-post-title-lg">Git et GitHub, pour de vrai</h1> <p class="lz-post-desc">Le modèle mental de Git en trois boîtes, quatre questions auxquelles il répond — revenir en arrière, ne rien perdre, essayer sans casser, travailler à plusieurs — l&#39;astuce « une phrase par ligne » pour les manuscrits, et tout ce que Git fait d&#39;autre. Aide-mémoire d&#39;une session Digital Wednesdays.</p> <div class="lz-post-tags"> <span class="lz-tag">#git</span><span class="lz-tag">#github</span><span class="lz-tag">#reproducibility</span><span class="lz-tag">#collaboration</span><span class="lz-tag">#français</span><span class="lz-tag">#digital-wednesdays</span> </div> </div> <div class="lz-prose"> <p><em>Le dépôt de la série : <a href="https://github.com/LukeAndersonTrocme/mercredis-numeriques">github.com/LukeAndersonTrocme/mercredis-numeriques</a> — les exercices sont là.</em></p>
+<h2 id="avant-de-venir">Avant de venir</h2>
+<ol>
+<li>Crée-toi un compte sur <a href="https://github.com">github.com</a>.</li>
+<li><em>Optionnel</em> : installe Git, puis vérifie avec <code>git --version</code> dans un terminal. Pas nécessaire pour l’exercice en classe, utile pour les exercices à la maison.</li>
+<li>Apporte ton portable. Un navigateur suffit.</li>
+</ol>
+<hr>
+<h2 id="où-on-en-était">Où on en était</h2>
+<p>La dernière fois, on a terminé sur ceci : <em>on ne versionne pas avec des noms de fichiers</em>. <code>analyse_v2.R</code>, <code>manuscrit_final_revu_LAT.docx</code>, <code>fig2_VRAIMENT_final.pdf</code> — chaque suffixe est une tentative maison de faire ce que Git fait correctement depuis 2005.</p>
+<p>Git n’est pas un outil d’informaticien. C’est un cahier de laboratoire pour tes fichiers : il note ce qui a changé, quand, par qui, et pourquoi — et il te laisse revenir à n’importe quelle page.</p>
+<hr>
+<h2 id="le-modèle-mental--trois-boîtes-et-un-nuage">Le modèle mental : trois boîtes et un nuage</h2>
+<p>Presque toute la confusion autour de Git vient d’un seul malentendu : croire qu’il y a <em>un</em> endroit où vivent tes fichiers. Il y en a quatre.</p>
+<pre class="language-plaintext" data-language="plaintext"><code is:raw="" class="language-plaintext"> dossier de travail    ce que tu édites
+         │
+      git add
+         ▼
+ index                 ce qui ira dans la prochaine photo
+         │
+      git commit
+         ▼
+ historique            les photos prises, pour toujours
+         │      ▲
+   git push    git pull           ── au-dessus : ta machine
+         ▼      │                 ── en dessous : ailleurs
+ GitHub                une copie de l'historique
+</code></pre>
+<ul>
+<li><strong>Le dossier de travail</strong> : tes fichiers, tels que tu les vois dans le Finder. Git les observe mais n’y touche pas.</li>
+<li><strong>L’index</strong> (<em>staging area</em>) : la liste de ce qui ira dans la prochaine photo. <code>git add</code> choisit ; ça te permet de faire un commit avec <em>un</em> changement logique, même si tu en as fait trois.</li>
+<li><strong>L’historique</strong> : la suite des commits. Un commit est une <strong>photo complète</strong> du projet à un moment donné, avec un auteur, une date et un message. Pas un diff — une photo. Git calcule les différences entre photos quand tu les demandes.</li>
+<li><strong>GitHub</strong> (le <em>remote</em>) : une copie de l’historique sur un autre ordinateur. <code>push</code> envoie, <code>pull</code> récupère.</li>
+</ul>
+<p><strong>Git ≠ GitHub.</strong> Git est le programme, sur ta machine, et il marche très bien hors-ligne. GitHub est un site qui héberge des copies de dépôts Git et ajoute une couche sociale par-dessus (pull requests, issues, pages web). GitLab et Bitbucket font la même chose.</p>
+<p>Quatre commandes couvrent l’essentiel de ton quotidien :</p>
+<pre class="language-bash" data-language="bash"><code is:raw="" class="language-bash"><span class="token function">git</span> status                       <span class="token comment"># où en suis-je ? (à lancer sans modération)</span>
+<span class="token function">git</span> <span class="token function">add</span> scripts/02_analyse.R     <span class="token comment"># je mets ce fichier dans la prochaine photo</span>
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"Corrige le filtre MAF dans l'analyse"</span>
+<span class="token function">git</span> push                         <span class="token comment"># j'envoie l'historique sur GitHub</span>
+</code></pre>
+<hr>
+<h2 id="1-comment-je-reviens-en-arrière">1. Comment je reviens en arrière ?</h2>
+<p><strong>Pourquoi ça fait mal.</strong> Tu as « amélioré » ton script hier, la figure ne ressemble plus à rien, et tu ne sais plus ce que tu as changé. Ctrl-Z ne remonte pas jusqu’à hier.</p>
+<p><strong>La règle.</strong> Commit petit, commit souvent, et écris <em>pourquoi</em> dans le message. Un commit, c’est un point de sauvegarde : tu ne peux revenir qu’aux endroits où tu t’es arrêté.</p>
+<pre class="language-bash" data-language="bash"><code is:raw="" class="language-bash"><span class="token function">git</span> log <span class="token parameter variable">--oneline</span>                <span class="token comment"># la liste des photos</span>
+<span class="token function">git</span> <span class="token function">diff</span>                         <span class="token comment"># ce qui a changé depuis la dernière photo</span>
+<span class="token function">git</span> restore scripts/02_analyse.R <span class="token comment"># jette mes modifications, reviens à la dernière photo</span>
+<span class="token function">git</span> restore <span class="token parameter variable">--source</span><span class="token operator">=</span>a1b2c3d scripts/02_analyse.R   <span class="token comment"># reviens à une photo plus vieille</span>
+</code></pre>
+<p>« Corrige le filtre MAF : 0.01 au lieu de 0.05, cf. réunion du 4 nov. » vaut infiniment plus que « update ». Le <em>quoi</em>, Git le voit déjà dans le diff. Le <em>pourquoi</em>, il n’y a que toi qui le sais — aujourd’hui.</p>
+<p><strong>Le test.</strong> Peux-tu retrouver, en moins d’une minute, la version du script qui a produit la figure 2 du mois dernier ?</p>
+<hr>
+<h2 id="2-comment-je-ne-perds-rien">2. Comment je ne perds rien ?</h2>
+<p><strong>Pourquoi ça fait mal.</strong> Un dépôt Git qui n’existe que sur ton portable meurt avec ton portable. L’historique le plus soigné du monde ne sert à rien au fond du fleuve.</p>
+<p><strong>La règle.</strong> Push à la fin de chaque séance de travail. Un dépôt <em>privé</em> sur GitHub est gratuit et illimité ; il n’y a aucune raison qu’un projet de recherche n’ait pas sa copie ailleurs.</p>
+<p>Mais attention à <em>ce</em> que tu pousses. Git versionne du <strong>code et du texte</strong>, pas des données. Un fichier <code>.gitignore</code> à la racine dit à Git quoi ignorer — et c’est exactement le découpage de la dernière session :</p>
+<pre class="language-plaintext" data-language="plaintext"><code is:raw="" class="language-plaintext"># .gitignore
+data/            # les données ne vont jamais dans Git
+output/          # régénérable, donc pas besoin
+*.Rhistory
+.DS_Store
+</code></pre>
+<p>Trois raisons de garder les données hors de Git : la taille (GitHub refuse les fichiers de plus de 100 Mo, et un dépôt alourdi le reste pour toujours), la confidentialité (des données de participants n’ont rien à faire sur un serveur américain, même privé), et le fait qu’elles ont déjà leur propre sauvegarde — l’espace <em>project</em> du cluster, par exemple.</p>
+<p><strong>Le test.</strong> Si ton portable disparaît ce soir, qu’est-ce que tu perds ? Si la réponse est « du code », tu as du travail.</p>
+<hr>
+<h2 id="3-comment-jessaie-quelque-chose-sans-casser-ce-qui-marche">3. Comment j’essaie quelque chose sans casser ce qui marche ?</h2>
+<p><strong>Pourquoi ça fait mal.</strong> Tu veux tester une autre méthode de normalisation, mais l’analyse actuelle marche et tu as un comité dans deux semaines. Alors tu copies le dossier en <code>analyse_test/</code>, et maintenant tu as deux projets qui divergent en silence.</p>
+<p><strong>La règle.</strong> Une branche. C’est une ligne d’historique parallèle, gratuite, que tu peux jeter sans conséquence.</p>
+<pre class="language-bash" data-language="bash"><code is:raw="" class="language-bash"><span class="token function">git</span> switch <span class="token parameter variable">-c</span> essai-normalisation   <span class="token comment"># nouvelle branche, on y est</span>
+<span class="token comment"># ... tu modifies, tu commits, tu testes ...</span>
+<span class="token function">git</span> switch main                     <span class="token comment"># retour à la version qui marche, intacte</span>
+<span class="token function">git</span> merge essai-normalisation       <span class="token comment"># ça a marché : on garde</span>
+<span class="token function">git</span> branch <span class="token parameter variable">-D</span> essai-normalisation   <span class="token comment"># ça n'a pas marché : on jette</span>
+</code></pre>
+<p>Un <em>fork</em> est la même idée, en plus gros : une copie complète d’un dépôt sous ton propre compte. C’est le terrain de jeu idéal quand le dépôt ne t’appartient pas — le code d’un collaborateur, un outil publié — et que tu veux tout casser tranquillement sans que personne ne le voie.</p>
+<p><strong>Le test.</strong> Y a-t-il un dossier <code>_test</code>, <code>_old</code> ou <code>_backup</code> dans ton projet en ce moment ? C’est une branche qui s’ignore.</p>
+<hr>
+<h2 id="4-comment-je-travaille-à-plusieurs">4. Comment je travaille à plusieurs ?</h2>
+<p><strong>Pourquoi ça fait mal.</strong> Deux personnes, un script, des versions qui s’échangent par courriel ou par Dropbox. Personne ne sait qui a changé quoi, et la fusion se fait à la main, à minuit, avant la date limite.</p>
+<p><strong>La règle.</strong> On ne modifie jamais directement la version commune. Chacun travaille sur sa branche (ou son fork), puis propose ses changements avec une <strong>pull request</strong> (PR) : une page GitHub qui montre le diff, où l’autre peut commenter ligne par ligne, et qui se fusionne en un clic une fois approuvée.</p>
+<pre class="language-plaintext" data-language="plaintext"><code is:raw="" class="language-plaintext">ton fork / ta branche ──▶ pull request ──▶ relecture ──▶ merge dans main
+</code></pre>
+<p>Et l’historique répond tout seul à la question « qui a fait quoi » :</p>
+<pre class="language-bash" data-language="bash"><code is:raw="" class="language-bash"><span class="token function">git</span> log <span class="token parameter variable">--author</span><span class="token operator">=</span><span class="token string">"Marie"</span> <span class="token parameter variable">--oneline</span>   <span class="token comment"># tout ce que Marie a fait</span>
+<span class="token function">git</span> blame scripts/02_analyse.R        <span class="token comment"># pour chaque ligne : qui, quand, quel commit</span>
+</code></pre>
+<p><code>blame</code> a un nom agressif, mais c’est l’outil le plus bienveillant de Git : il te mène au commit, donc au message, donc au <em>pourquoi</em>.</p>
+<p><strong>Le test.</strong> Dans ton projet partagé, peux-tu dire qui a changé cette ligne, quand, et pourquoi — sans envoyer de courriel ?</p>
+<hr>
+<h2 id="écrire-un-manuscrit--une-phrase-par-ligne">Écrire un manuscrit : une phrase par ligne</h2>
+<p>Git marche pour tout ce qui est du texte, y compris un article en LaTeX ou en Markdown. Je l’utilise pour tous mes manuscrits avec mes collaborateurs. Il y a une seule astuce à connaître, et elle change tout.</p>
+<p>Git compare les fichiers <strong>ligne par ligne</strong>. Si ton paragraphe est une seule ligne de 600 caractères, changer un mot marque tout le paragraphe comme modifié :</p>
+<pre class="language-diff" data-language="diff"><code is:raw="" class="language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> La structure génétique du Québec reflète l'histoire de son peuplement. Les fondateurs se sont installés le long du Saint-Laurent. Les régions éloignées montrent un effet fondateur marqué.
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> La structure génétique du Québec reflète l'histoire de son peuplement. Les fondateurs se sont installés le long du Saint-Laurent. Les régions éloignées montrent un effet fondateur prononcé.
+</span></span></code></pre>
+<p>Bonne chance pour trouver le mot. Maintenant, la même modification, avec <strong>une phrase par ligne</strong> :</p>
+<pre class="language-diff" data-language="diff"><code is:raw="" class="language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> La structure génétique du Québec reflète l'histoire de son peuplement.
+</span><span class="token prefix unchanged"> </span><span class="token line"> Les fondateurs se sont installés le long du Saint-Laurent.
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> Les régions éloignées montrent un effet fondateur marqué.
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> Les régions éloignées montrent un effet fondateur prononcé.
+</span></span></code></pre>
+<p>La phrase modifiée, entière, et rien d’autre. LaTeX et Markdown ignorent les retours à la ligne simples — le PDF final est identique. Seul le diff change, et il devient lisible.</p>
+<p>Pour les cas où tu ne contrôles pas le formatage : <code>git diff --word-diff</code> compare mot par mot. Et si tes collaborateurs ne jurent que par Overleaf, Overleaf sait synchroniser un projet avec un dépôt Git (selon l’abonnement).</p>
+<hr>
+<h2 id="ce-que-git-fait-dautre">Ce que Git fait d’autre</h2>
+<p>Une fois que tu as le modèle mental, tu le croises partout.</p>
+<ul>
+<li><strong>Installer des logiciels.</strong> La moitié des outils de génomique s’installent depuis GitHub : <code>git clone</code> puis <code>pip install -e .</code>, ou <code>remotes::install_github("auteur/package")</code> en R. Le dépôt, c’est aussi la doc, les issues (« est-ce que quelqu’un a déjà eu cette erreur ? ») et l’historique des versions.</li>
+<li><strong>Partager le code d’un article.</strong> Un dépôt public, lié dans la section <em>Code availability</em>. Une <em>release</em> GitHub peut être archivée sur <a href="https://zenodo.org">Zenodo</a> qui lui attribue un DOI — ton code devient citable, et la version exacte de l’article est figée.</li>
+<li><strong>Héberger un site web.</strong> GitHub Pages sert gratuitement un site à partir d’un dépôt. <a href="https://popgen.ca">popgen.ca</a> est un dépôt Git : ce billet que tu lis est un commit.</li>
+<li><strong>Garder ses machines synchronisées.</strong> Portable, ordinateur du labo, cluster : <code>push</code> d’un côté, <code>pull</code> de l’autre, et le code est le même partout. Fini le <code>scp</code> de scripts dans tous les sens. (Les données, elles, restent où elles sont.)</li>
+<li><strong>Rédiger à plusieurs.</strong> Voir plus haut : thèse, articles, demandes de subvention — tout ce qui est du texte brut.</li>
+</ul>
+<hr>
+<h2 id="exercices">Exercices</h2>
+<p>Tous dans le <a href="https://github.com/LukeAndersonTrocme/mercredis-numeriques">dépôt de la série</a>, dossier <code>2026-11-11-git/exercices/</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>Où</th><th>Durée</th><th>Quoi</th></tr></thead><tbody><tr><td><strong>1</strong></td><td>en classe, navigateur</td><td>10 min</td><td>Fork, ajoute ta fiche dans <code>participants/</code>, ouvre une pull request</td></tr><tr><td><strong>2</strong></td><td>à la maison, terminal</td><td>15 min</td><td>La même chose, en ligne de commande</td></tr><tr><td><strong>3</strong></td><td>à la maison, ton projet</td><td>15 min</td><td><code>git init</code> sur un vrai projet, un <code>.gitignore</code>, un premier push vers un dépôt privé</td></tr><tr><td><strong>4</strong></td><td>à la maison, navigateur</td><td>10 min</td><td>Corrige une phrase d’un manuscrit écrit « une phrase par ligne », regarde le diff</td></tr></tbody></table>
+<p>L’exercice 3 est celui qui compte. Les autres sont de l’entraînement.</p>
+<hr>
+<h2 id="food-for-thought">Food for thought</h2>
+<ul>
+<li>Quel est le plus vieux fichier <code>_final</code> de ton ordinateur ? Qu’est-ce qu’il te faudrait pour le supprimer en confiance ?</li>
+<li>Avec qui partages-tu du code ou du texte en ce moment, et comment ? Qu’est-ce qui coince ?</li>
+<li>Qu’est-ce qui ne devrait <em>jamais</em> aller dans un dépôt Git dans ton projet ? (Pense aux données, mais aussi aux mots de passe et aux clés d’API.)</li>
+<li>Un dépôt public de ton projet de thèse : qu’est-ce qui te retient ?</li>
+</ul>
+<hr>
+<p><em>Références : Blischak JD, Davenport ER, Wilson G (2016), « A Quick Introduction to Version Control with Git and GitHub », PLoS Computational Biology 12(1). Bryan J (2018), « Excuse Me, Do You Have a Moment to Talk About Version Control? », The American Statistician 72(1).</em></p> </div> <div class="lz-profile-card"> <div class="lz-profile-img-wrap"> <div class="lz-profile-img-placeholder" aria-label="Profile photo placeholder">?</div> </div> <div class="lz-profile-info"> <div class="lz-profile-name">Luke Anderson-Trocm&eacute;</div> <p class="lz-profile-bio">
+Luke is a real mr. professor man of population genetics
+      at Universit&eacute; de Montr&eacute;al and this is his webstie. Please <a href="/lukezone/guestbook" class="lz-link">sign the guestbook</a>.
+</p> <div class="lz-profile-meta"> <span>Member since 2025</span> <a href="/lukezone" class="lz-link">&larr; back to the zone</a> </div> </div> </div> </div>  <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).only=e;window.dispatchEvent(new Event("astro:only"));})();;(()=>{var A=Object.defineProperty;var g=(i,o,a)=>o in i?A(i,o,{enumerable:!0,configurable:!0,writable:!0,value:a}):i[o]=a;var d=(i,o,a)=>g(i,typeof o!="symbol"?o+"":o,a);{let i={0:t=>m(t),1:t=>a(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(a(t)),5:t=>new Set(a(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>1/0*t},o=t=>{let[l,e]=t;return l in i?i[l](e):void 0},a=t=>t.map(o),m=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([l,e])=>[l,o(e)]));class y extends HTMLElement{constructor(){super(...arguments);d(this,"Component");d(this,"hydrator");d(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let c=this.querySelectorAll("astro-slot"),n={},h=this.querySelectorAll("template[data-astro-template]");for(let r of h){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of c){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("name")||"default"]=r.innerHTML)}let p;try{p=this.hasAttribute("props")?m(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(s+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}let u;await this.hydrator(this)(this.Component,p,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});d(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),c.disconnect(),this.childrenConnectedCallback()},c=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});c.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}async start(){let e=JSON.parse(this.getAttribute("opts")),c=this.getAttribute("client");if(Astro[c]===void 0){window.addEventListener(`astro:${c}`,()=>this.start(),{once:!0});return}try{await Astro[c](async()=>{let n=this.getAttribute("renderer-url"),[h,{default:p}]=await Promise.all([import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),u=this.getAttribute("component-export")||"default";if(!u.includes("."))this.Component=h[u];else{this.Component=h;for(let f of u.split("."))this.Component=this.Component[f]}return this.hydrator=p,this.hydrate},e,this)}catch(n){console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`,n)}}attributeChangedCallback(){this.hydrate()}}d(y,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",y)}})();</script><astro-island uid="2r2Crs" component-url="/_astro/LukezoneThemeSwitcher.DULuYkR3.js" component-export="default" renderer-url="/_astro/client.CEcN8nfy.js" props="{}" ssr client="only" opts="{&quot;name&quot;:&quot;LukezoneThemeSwitcher&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> <astro-island uid="Z5BOD7" component-url="/_astro/LukezoneEffects.DjjXTgF1.js" component-export="default" renderer-url="/_astro/client.CEcN8nfy.js" props="{&quot;reading&quot;:[0,true]}" ssr client="only" opts="{&quot;name&quot;:&quot;LukezoneEffects&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> <astro-island uid="2j3lIB" component-url="/_astro/LukezoneAds.DqMPWN2k.js" component-export="default" renderer-url="/_astro/client.CEcN8nfy.js" props="{}" ssr client="only" opts="{&quot;name&quot;:&quot;LukezoneAds&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> </body></html>
